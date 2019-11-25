@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29424.173
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartDmsWeb", "SmartDmsWeb\SmartDmsWeb.csproj", "{3F284F1D-7041-4DF1-8CF0-64A6D1A57E86}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartDmsCommon", "SmartDmsCommon\SmartDmsCommon.csproj", "{EF8D8088-FC84-4292-B842-9AA73760B559}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartDmsData", "SmartDmsData\SmartDmsData.csproj", "{F285EBEF-B40D-4CF2-AD0E-96ED0801F6D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartDmsServices", "SmartDmsServices\SmartDmsServices.csproj", "{AE808A82-BF9D-4A12-BC0D-2860CD03494B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{A0652A4B-8471-41D5-8EEC-F8BCC17D647B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartDmsUnitTests", "Test\SmartDmsUnitTests\SmartDmsUnitTests.csproj", "{B2AC121B-DD45-4ABF-9844-CB1D5AEE3A20}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartDmsIntegrationTests", "Test\SmartDmsIntegrationTests\SmartDmsIntegrationTests.csproj", "{F053A731-3676-4D11-9B1C-6C32EA918187}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3F284F1D-7041-4DF1-8CF0-64A6D1A57E86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F284F1D-7041-4DF1-8CF0-64A6D1A57E86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F284F1D-7041-4DF1-8CF0-64A6D1A57E86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F284F1D-7041-4DF1-8CF0-64A6D1A57E86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF8D8088-FC84-4292-B842-9AA73760B559}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF8D8088-FC84-4292-B842-9AA73760B559}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF8D8088-FC84-4292-B842-9AA73760B559}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF8D8088-FC84-4292-B842-9AA73760B559}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F285EBEF-B40D-4CF2-AD0E-96ED0801F6D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F285EBEF-B40D-4CF2-AD0E-96ED0801F6D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F285EBEF-B40D-4CF2-AD0E-96ED0801F6D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F285EBEF-B40D-4CF2-AD0E-96ED0801F6D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE808A82-BF9D-4A12-BC0D-2860CD03494B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE808A82-BF9D-4A12-BC0D-2860CD03494B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE808A82-BF9D-4A12-BC0D-2860CD03494B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE808A82-BF9D-4A12-BC0D-2860CD03494B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2AC121B-DD45-4ABF-9844-CB1D5AEE3A20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2AC121B-DD45-4ABF-9844-CB1D5AEE3A20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2AC121B-DD45-4ABF-9844-CB1D5AEE3A20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2AC121B-DD45-4ABF-9844-CB1D5AEE3A20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F053A731-3676-4D11-9B1C-6C32EA918187}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F053A731-3676-4D11-9B1C-6C32EA918187}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F053A731-3676-4D11-9B1C-6C32EA918187}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F053A731-3676-4D11-9B1C-6C32EA918187}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B2AC121B-DD45-4ABF-9844-CB1D5AEE3A20} = {A0652A4B-8471-41D5-8EEC-F8BCC17D647B}
+		{F053A731-3676-4D11-9B1C-6C32EA918187} = {A0652A4B-8471-41D5-8EEC-F8BCC17D647B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E31E28DF-A3A7-40FF-ABFB-C2809DFF8771}
+	EndGlobalSection
+EndGlobal

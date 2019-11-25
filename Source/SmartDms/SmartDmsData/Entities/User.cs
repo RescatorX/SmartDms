@@ -1,0 +1,67 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+
+using Microsoft.AspNetCore.Identity;
+
+using SmartDmsData.Enums;
+
+namespace SmartDmsData.Entities
+{
+    public class User : IdentityUser//<Guid>
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public DateTime Created { get; set; }
+        public UserStatus Status { get; set; }
+        public string DefaultColor { get; set; }
+
+        [NotMapped]
+        public bool IsAdmin { get; set; }
+
+        [NotMapped]
+        public bool IsStylist { get; set; }
+
+        public virtual ICollection<UserClaim> Claims { get; set; }
+        public virtual ICollection<UserLogin> Logins { get; set; }
+        public virtual ICollection<UserToken> Tokens { get; set; }
+        public virtual ICollection<UserRole> UserRoles { get; set; }
+    }
+
+    public class Role : IdentityRole<string>
+    {
+        public string Description { get; set; }
+        public RoleStatus Status { get; set; }
+
+        public virtual ICollection<UserRole> UserRoles { get; set; }
+        public virtual ICollection<RoleClaim> RoleClaims { get; set; }
+    }
+
+    public class UserRole : IdentityUserRole<string>
+    {
+        public DateTime Added { get; set; }
+
+        public virtual User User { get; set; }
+        public virtual Role Role { get; set; }
+    }
+
+    public class UserClaim : IdentityUserClaim<string>
+    {
+        public virtual User User { get; set; }
+    }
+
+    public class UserLogin : IdentityUserLogin<string>
+    {
+        public virtual User User { get; set; }
+    }
+
+    public class RoleClaim : IdentityRoleClaim<string>
+    {
+        public virtual Role Role { get; set; }
+    }
+
+    public class UserToken : IdentityUserToken<string>
+    {
+        public virtual User User { get; set; }
+    }
+}

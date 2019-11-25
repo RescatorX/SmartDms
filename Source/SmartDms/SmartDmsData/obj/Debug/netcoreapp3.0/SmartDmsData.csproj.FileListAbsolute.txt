@@ -1,0 +1,13 @@
+C:\Work\SmartDms\Source\SmartDms\SmartDmsData\bin\Debug\netcoreapp3.0\SmartDmsData.deps.json
+C:\Work\SmartDms\Source\SmartDms\SmartDmsData\bin\Debug\netcoreapp3.0\SmartDmsData.dll
+C:\Work\SmartDms\Source\SmartDms\SmartDmsData\obj\Debug\netcoreapp3.0\SmartDmsData.csprojAssemblyReference.cache
+C:\Work\SmartDms\Source\SmartDms\SmartDmsData\obj\Debug\netcoreapp3.0\SmartDmsData.AssemblyInfoInputs.cache
+C:\Work\SmartDms\Source\SmartDms\SmartDmsData\obj\Debug\netcoreapp3.0\SmartDmsData.AssemblyInfo.cs
+C:\Work\SmartDms\Source\SmartDms\SmartDmsData\bin\Debug\netcoreapp3.0\SmartDmsData.runtimeconfig.json
+C:\Work\SmartDms\Source\SmartDms\SmartDmsData\bin\Debug\netcoreapp3.0\SmartDmsData.runtimeconfig.dev.json
+C:\Work\SmartDms\Source\SmartDms\SmartDmsData\bin\Debug\netcoreapp3.0\SmartDmsData.pdb
+C:\Work\SmartDms\Source\SmartDms\SmartDmsData\bin\Debug\netcoreapp3.0\SmartDmsCommon.dll
+C:\Work\SmartDms\Source\SmartDms\SmartDmsData\bin\Debug\netcoreapp3.0\SmartDmsCommon.pdb
+C:\Work\SmartDms\Source\SmartDms\SmartDmsData\obj\Debug\netcoreapp3.0\SmartDmsData.csproj.CopyComplete
+C:\Work\SmartDms\Source\SmartDms\SmartDmsData\obj\Debug\netcoreapp3.0\SmartDmsData.dll
+C:\Work\SmartDms\Source\SmartDms\SmartDmsData\obj\Debug\netcoreapp3.0\SmartDmsData.pdb
