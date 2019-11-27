@@ -110,6 +110,10 @@ namespace SmartDmsData.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
@@ -126,6 +130,8 @@ namespace SmartDmsData.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityRole");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -141,10 +147,6 @@ namespace SmartDmsData.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("RoleId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -154,8 +156,6 @@ namespace SmartDmsData.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityRoleClaim<string>");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -171,19 +171,15 @@ namespace SmartDmsData.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("AspNetUserClaims");
+                    b.HasIndex("UserId");
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUserClaim<string>");
+                    b.ToTable("AspNetUserClaims");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -196,10 +192,6 @@ namespace SmartDmsData.Migrations
                         .HasColumnType("nvarchar(128)")
                         .HasMaxLength(128);
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
 
@@ -209,9 +201,9 @@ namespace SmartDmsData.Migrations
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
-                    b.ToTable("AspNetUserLogins");
+                    b.HasIndex("UserId");
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUserLogin<string>");
+                    b.ToTable("AspNetUserLogins");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
@@ -248,18 +240,12 @@ namespace SmartDmsData.Migrations
                         .HasColumnType("nvarchar(128)")
                         .HasMaxLength(128);
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUserToken<string>");
                 });
 
             modelBuilder.Entity("SmartDmsData.Entities.AuditTrail", b =>
@@ -322,51 +308,6 @@ namespace SmartDmsData.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Document");
-                });
-
-            modelBuilder.Entity("SmartDmsData.Entities.Role", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NormalizedName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Role");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "d912a016-cf37-425e-8fed-13dc647cfc04",
-                            ConcurrencyStamp = "3d1b2908-7ecf-4a72-849c-d35149774b62",
-                            Description = "Administrators role",
-                            Name = "Admin",
-                            NormalizedName = "ADMIN",
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = "e02dfb4e-a5e0-4c91-a542-6da987c5947d",
-                            ConcurrencyStamp = "85230b8e-17bd-4346-8264-f14291a302f5",
-                            Description = "Stylists role",
-                            Name = "Stylist",
-                            NormalizedName = "STYLIST",
-                            Status = 1
-                        });
                 });
 
             modelBuilder.Entity("SmartDmsData.Entities.User", b =>
@@ -451,10 +392,10 @@ namespace SmartDmsData.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "d48e7d77-8baf-49af-b667-58bfa9a68ab0",
+                            Id = "4821f4a7-d77f-45b6-ac3a-34c12be19beb",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "79e829c3-6805-46fd-8ab7-df80ee5c7ea3",
-                            Created = new DateTime(2019, 11, 25, 12, 22, 13, 669, DateTimeKind.Local).AddTicks(7503),
+                            ConcurrencyStamp = "366ad284-1ef3-40e0-8cb0-212898361eac",
+                            Created = new DateTime(2019, 11, 27, 1, 56, 52, 68, DateTimeKind.Local).AddTicks(3742),
                             DefaultColor = "lightgreen",
                             Email = "xkalinam@email.cz",
                             EmailConfirmed = true,
@@ -466,17 +407,17 @@ namespace SmartDmsData.Migrations
                             PasswordHash = "d82494f05d6917ba02f7aaa29689ccb444bb73f20380876cb05d1f37537b7892",
                             PhoneNumber = "123456789",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "2eb6039e-8cef-40e1-9c4b-234cb5e3079f",
+                            SecurityStamp = "df8681b9-e035-4a66-8d36-c84744bd41eb",
                             Status = 2,
                             TwoFactorEnabled = false,
                             UserName = "RescatorX"
                         },
                         new
                         {
-                            Id = "f2b08d36-57f5-4811-ad61-03c93645132e",
+                            Id = "bcf87716-5454-4b99-8068-31b84e2d8aef",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a83c382d-1b4c-4191-b4a5-9bc07bd766b4",
-                            Created = new DateTime(2019, 11, 25, 12, 22, 13, 678, DateTimeKind.Local).AddTicks(8171),
+                            ConcurrencyStamp = "ff25d3df-0ad1-46b4-9e1f-055ed9f1515d",
+                            Created = new DateTime(2019, 11, 27, 1, 56, 52, 72, DateTimeKind.Local).AddTicks(544),
                             DefaultColor = "lightblue",
                             Email = "jiri.pragr@seznam.cz",
                             EmailConfirmed = true,
@@ -488,17 +429,17 @@ namespace SmartDmsData.Migrations
                             PasswordHash = "d82494f05d6917ba02f7aaa29689ccb444bb73f20380876cb05d1f37537b7892",
                             PhoneNumber = "987654321",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "984cdc03-9b9b-4c61-9c65-5629cec14808",
+                            SecurityStamp = "5af78812-d916-4da0-93dc-6c4a3e3018c9",
                             Status = 2,
                             TwoFactorEnabled = false,
                             UserName = "jpragr"
                         },
                         new
                         {
-                            Id = "15045db7-d628-4b9f-9363-afd9214c9eb3",
+                            Id = "374f66ab-ea47-4a7b-9022-ba6e567a2afb",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7c7777b4-bf11-44d9-8ac7-2df5ec73b109",
-                            Created = new DateTime(2019, 11, 25, 12, 22, 13, 678, DateTimeKind.Local).AddTicks(8878),
+                            ConcurrencyStamp = "d5b4a88d-8172-459d-94ac-4f44d0100f91",
+                            Created = new DateTime(2019, 11, 27, 1, 56, 52, 72, DateTimeKind.Local).AddTicks(790),
                             DefaultColor = "pink",
                             Email = "sandra.nisterova@seznam.cz",
                             EmailConfirmed = true,
@@ -510,36 +451,44 @@ namespace SmartDmsData.Migrations
                             PasswordHash = "d82494f05d6917ba02f7aaa29689ccb444bb73f20380876cb05d1f37537b7892",
                             PhoneNumber = "666555444",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "d924299c-6063-413a-b5c8-638d2aa5f3c5",
+                            SecurityStamp = "bd5ae5f9-80e0-449f-87c5-c5784e6c0a1b",
                             Status = 2,
                             TwoFactorEnabled = false,
                             UserName = "snisterova"
                         });
                 });
 
-            modelBuilder.Entity("SmartDmsData.Entities.RoleClaim", b =>
+            modelBuilder.Entity("SmartDmsData.Entities.Role", b =>
                 {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>");
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityRole");
 
-                    b.HasDiscriminator().HasValue("RoleClaim");
-                });
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
 
-            modelBuilder.Entity("SmartDmsData.Entities.UserClaim", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>");
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
-                    b.HasIndex("UserId");
+                    b.HasDiscriminator().HasValue("Role");
 
-                    b.HasDiscriminator().HasValue("UserClaim");
-                });
-
-            modelBuilder.Entity("SmartDmsData.Entities.UserLogin", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>");
-
-                    b.HasIndex("UserId");
-
-                    b.HasDiscriminator().HasValue("UserLogin");
+                    b.HasData(
+                        new
+                        {
+                            Id = "fae1c89e-afa2-4960-90fd-e6f229edf50d",
+                            ConcurrencyStamp = "7aed1d71-80a7-4956-836a-4fd24a2ecf70",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN",
+                            Description = "Administrators role",
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = "68be4225-23d0-4e1f-a789-782abd1e1c29",
+                            ConcurrencyStamp = "67abe7d7-bec9-4012-aef4-265c06e24c62",
+                            Name = "Stylist",
+                            NormalizedName = "STYLIST",
+                            Description = "Stylists role",
+                            Status = 1
+                        });
                 });
 
             modelBuilder.Entity("SmartDmsData.Entities.UserRole", b =>
@@ -554,50 +503,27 @@ namespace SmartDmsData.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "d48e7d77-8baf-49af-b667-58bfa9a68ab0",
-                            RoleId = "d912a016-cf37-425e-8fed-13dc647cfc04",
-                            Added = new DateTime(2019, 11, 25, 12, 22, 13, 678, DateTimeKind.Local).AddTicks(8878)
+                            UserId = "4821f4a7-d77f-45b6-ac3a-34c12be19beb",
+                            RoleId = "fae1c89e-afa2-4960-90fd-e6f229edf50d",
+                            Added = new DateTime(2019, 11, 27, 1, 56, 52, 72, DateTimeKind.Local).AddTicks(1777)
                         },
                         new
                         {
-                            UserId = "f2b08d36-57f5-4811-ad61-03c93645132e",
-                            RoleId = "d912a016-cf37-425e-8fed-13dc647cfc04",
-                            Added = new DateTime(2019, 11, 25, 12, 22, 13, 678, DateTimeKind.Local).AddTicks(8878)
+                            UserId = "bcf87716-5454-4b99-8068-31b84e2d8aef",
+                            RoleId = "fae1c89e-afa2-4960-90fd-e6f229edf50d",
+                            Added = new DateTime(2019, 11, 27, 1, 56, 52, 72, DateTimeKind.Local).AddTicks(3052)
                         },
                         new
                         {
-                            UserId = "f2b08d36-57f5-4811-ad61-03c93645132e",
-                            RoleId = "e02dfb4e-a5e0-4c91-a542-6da987c5947d",
-                            Added = new DateTime(2019, 11, 25, 12, 22, 13, 678, DateTimeKind.Local).AddTicks(8878)
+                            UserId = "bcf87716-5454-4b99-8068-31b84e2d8aef",
+                            RoleId = "68be4225-23d0-4e1f-a789-782abd1e1c29",
+                            Added = new DateTime(2019, 11, 27, 1, 56, 52, 72, DateTimeKind.Local).AddTicks(3133)
                         },
                         new
                         {
-                            UserId = "15045db7-d628-4b9f-9363-afd9214c9eb3",
-                            RoleId = "e02dfb4e-a5e0-4c91-a542-6da987c5947d",
-                            Added = new DateTime(2019, 11, 25, 12, 22, 13, 678, DateTimeKind.Local).AddTicks(8878)
-                        });
-                });
-
-            modelBuilder.Entity("SmartDmsData.Entities.UserToken", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUserToken<string>");
-
-                    b.HasDiscriminator().HasValue("UserToken");
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = "d48e7d77-8baf-49af-b667-58bfa9a68ab0",
-                            LoginProvider = "SmartDmsLoginProvider",
-                            Name = "Token1",
-                            Value = "Token1"
-                        },
-                        new
-                        {
-                            UserId = "f2b08d36-57f5-4811-ad61-03c93645132e",
-                            LoginProvider = "SmartDmsLoginProvider",
-                            Name = "Token2",
-                            Value = "Token2"
+                            UserId = "374f66ab-ea47-4a7b-9022-ba6e567a2afb",
+                            RoleId = "68be4225-23d0-4e1f-a789-782abd1e1c29",
+                            Added = new DateTime(2019, 11, 27, 1, 56, 52, 72, DateTimeKind.Local).AddTicks(3173)
                         });
                 });
 
@@ -610,11 +536,38 @@ namespace SmartDmsData.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.HasOne("SmartDmsData.Entities.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("SmartDmsData.Entities.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.HasOne("SmartDmsData.Entities.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -633,52 +586,17 @@ namespace SmartDmsData.Migrations
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("SmartDmsData.Entities.RoleClaim", b =>
-                {
-                    b.HasOne("SmartDmsData.Entities.Role", "Role")
-                        .WithMany("RoleClaims")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("SmartDmsData.Entities.UserClaim", b =>
-                {
-                    b.HasOne("SmartDmsData.Entities.User", "User")
-                        .WithMany("Claims")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("SmartDmsData.Entities.UserLogin", b =>
-                {
-                    b.HasOne("SmartDmsData.Entities.User", "User")
-                        .WithMany("Logins")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("SmartDmsData.Entities.UserRole", b =>
                 {
                     b.HasOne("SmartDmsData.Entities.Role", "Role")
                         .WithMany("UserRoles")
                         .HasForeignKey("RoleId")
+                        .HasConstraintName("FK_AspNetUserRoles_AspNetRoles_RoleId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("SmartDmsData.Entities.User", "User")
                         .WithMany("UserRoles")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("SmartDmsData.Entities.UserToken", b =>
-                {
-                    b.HasOne("SmartDmsData.Entities.User", "User")
-                        .WithMany("Tokens")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

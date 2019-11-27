@@ -8,7 +8,7 @@
     ".NETCoreApp,Version=v3.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Administrator\\.nuget\\packages\\": {},
+    "C:\\Users\\Miroslav\\.nuget\\packages\\": {},
     "C:\\Microsoft\\Xamarin\\NuGet\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
@@ -18,7 +18,7 @@
       "projectUniqueName": "C:\\Work\\SmartDms\\Source\\SmartDms\\SmartDmsCommon\\SmartDmsCommon.csproj",
       "projectName": "SmartDmsCommon",
       "projectPath": "C:\\Work\\SmartDms\\Source\\SmartDms\\SmartDmsCommon\\SmartDmsCommon.csproj",
-      "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\Miroslav\\.nuget\\packages\\",
       "outputPath": "C:\\Work\\SmartDms\\Source\\SmartDms\\SmartDmsCommon\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
@@ -26,7 +26,7 @@
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Miroslav\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],

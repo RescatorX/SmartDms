@@ -248,3 +248,15 @@ C:\Work\SmartDms\Source\SmartDms\Test\SmartDmsIntegrationTests\bin\Debug\netcore
 C:\Work\SmartDms\Source\SmartDms\Test\SmartDmsIntegrationTests\obj\Debug\netcoreapp3.0\SmartDmsIntegrationTests.csproj.CopyComplete
 C:\Work\SmartDms\Source\SmartDms\Test\SmartDmsIntegrationTests\obj\Debug\netcoreapp3.0\SmartDmsIntegrationTests.dll
 C:\Work\SmartDms\Source\SmartDms\Test\SmartDmsIntegrationTests\obj\Debug\netcoreapp3.0\SmartDmsIntegrationTests.pdb
+C:\Work\SmartDms\Source\SmartDms\Test\SmartDmsIntegrationTests\bin\Debug\netcoreapp3.0\GraphQL.dll
+C:\Work\SmartDms\Source\SmartDms\Test\SmartDmsIntegrationTests\bin\Debug\netcoreapp3.0\GraphQL-Parser.dll
+C:\Work\SmartDms\Source\SmartDms\Test\SmartDmsIntegrationTests\bin\Debug\netcoreapp3.0\GraphQL.Server.Core.dll
+C:\Work\SmartDms\Source\SmartDms\Test\SmartDmsIntegrationTests\bin\Debug\netcoreapp3.0\GraphQL.Server.Transports.AspNetCore.dll
+C:\Work\SmartDms\Source\SmartDms\Test\SmartDmsIntegrationTests\bin\Debug\netcoreapp3.0\GraphQL.Server.Ui.Playground.dll
+C:\Work\SmartDms\Source\SmartDms\Test\SmartDmsIntegrationTests\bin\Debug\netcoreapp3.0\System.Reactive.Core.dll
+C:\Work\SmartDms\Source\SmartDms\Test\SmartDmsIntegrationTests\bin\Debug\netcoreapp3.0\System.Reactive.Interfaces.dll
+C:\Work\SmartDms\Source\SmartDms\Test\SmartDmsIntegrationTests\bin\Debug\netcoreapp3.0\System.Reactive.Linq.dll
+C:\Work\SmartDms\Source\SmartDms\Test\SmartDmsIntegrationTests\bin\Debug\netcoreapp3.0\EntityFramework.SqlServer.dll
+C:\Work\SmartDms\Source\SmartDms\Test\SmartDmsIntegrationTests\bin\Debug\netcoreapp3.0\EntityFramework.dll
+C:\Work\SmartDms\Source\SmartDms\Test\SmartDmsIntegrationTests\bin\Debug\netcoreapp3.0\Microsoft.AspNet.Identity.Core.dll
+C:\Work\SmartDms\Source\SmartDms\Test\SmartDmsIntegrationTests\bin\Debug\netcoreapp3.0\Microsoft.AspNet.Identity.EntityFramework.dll

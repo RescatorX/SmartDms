@@ -9,6 +9,6 @@ namespace SmartDmsServices.Interfaces
     {
         Task<User> GetAllowedUser(string userName);
 
-        Task<List<UserRole>> GetUserRoles(string userId);
+        Task<List<Microsoft.AspNetCore.Identity.IdentityUserRole<string>>> GetUserRoles(string userId);
     }
 }

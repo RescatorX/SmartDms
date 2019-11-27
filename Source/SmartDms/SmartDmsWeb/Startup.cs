@@ -10,10 +10,15 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using GraphQL;
+using GraphQL.Server;
+using GraphQL.Server.Ui.Playground;
+
 using SmartDmsData;
 using SmartDmsData.Entities;
 using SmartDmsServices.Services;
 using SmartDmsServices.Interfaces;
+using SmartDmsWeb.GraphQL;
 
 namespace SmartDmsWeb
 {
@@ -35,6 +40,12 @@ namespace SmartDmsWeb
             services.AddSingleton<IEmailSender, EmailSender>();
             services.AddSingleton<ISmsSender, SmsSender>();
             services.AddSingleton<IUserService, UserService>();
+
+            services.AddScoped<IDependencyResolver>(s => new FuncDependencyResolver(s.GetRequiredService));
+            services.AddScoped<AppSchema>();
+
+            services.AddGraphQL(o => { o.ExposeExceptions = false; })
+                .AddGraphTypes(ServiceLifetime.Scoped);
 
             services.AddDefaultIdentity<User>().AddEntityFrameworkStores<SmartDmsDbContext>();
             services.AddIdentityServer().AddApiAuthorization<User, SmartDmsDbContext>();
@@ -83,6 +94,9 @@ namespace SmartDmsWeb
                     pattern: "{controller}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+            app.UseGraphQL<AppSchema>();
+            app.UseGraphQLPlayground(options: new GraphQLPlaygroundOptions());
 
             app.UseSpa(spa =>
             {

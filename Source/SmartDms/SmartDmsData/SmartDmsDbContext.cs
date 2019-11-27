@@ -5,7 +5,6 @@ using System.Configuration;
 using IdentityServer4.EntityFramework.Options;
 
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -41,24 +40,6 @@ namespace SmartDmsData
                 b.Property(u => u.Email).HasMaxLength(128);
                 b.Property(u => u.NormalizedEmail).HasMaxLength(128);
 
-                // Each User can have many UserClaims
-                b.HasMany(e => e.Claims)
-                    .WithOne(e => e.User)
-                    .HasForeignKey(uc => uc.UserId)
-                    .IsRequired();
-
-                // Each User can have many UserLogins
-                b.HasMany(e => e.Logins)
-                    .WithOne(e => e.User)
-                    .HasForeignKey(ul => ul.UserId)
-                    .IsRequired();
-
-                // Each User can have many UserTokens
-                b.HasMany(e => e.Tokens)
-                    .WithOne(e => e.User)
-                    .HasForeignKey(ut => ut.UserId)
-                    .IsRequired();
-
                 // Each User can have many entries in the UserRole join table
                 b.HasMany(e => e.UserRoles)
                     .WithOne(e => e.User)
@@ -73,18 +54,6 @@ namespace SmartDmsData
                     .WithOne(e => e.Role)
                     .HasForeignKey(ur => ur.RoleId)
                     .IsRequired();
-
-                // Each Role can have many associated RoleClaims
-                b.HasMany(e => e.RoleClaims)
-                    .WithOne(e => e.Role)
-                    .HasForeignKey(rc => rc.RoleId)
-                    .IsRequired();
-            });
-
-            modelBuilder.Entity<UserToken>(b =>
-            {
-                b.Property(t => t.LoginProvider).HasMaxLength(128);
-                b.Property(t => t.Name).HasMaxLength(128);
             });
 
             // Seed initial data
@@ -118,8 +87,6 @@ namespace SmartDmsData
                 throw new Exception("PrefillDatabase - Roles table prefill error: " + e.Message, e);
             }
 
-            List<UserClaim> adminUserClaims = new List<UserClaim>();
-            List<UserToken> adminUserTokens = new List<UserToken>();
             List<UserRole> adminUserRoles = new List<UserRole>();
 
             User adminUser1 = null;
@@ -137,14 +104,11 @@ namespace SmartDmsData
                     Email = "xkalinam@email.cz",
                     NormalizedEmail = "XKALINAM@EMAIL.CZ",
                     EmailConfirmed = true,
-                    Logins = null,
                     TwoFactorEnabled = false,
                     PhoneNumber = "123456789",
                     PhoneNumberConfirmed = true,
                     AccessFailedCount = 0,
-                    Claims = adminUserClaims,
                     UserRoles = adminUserRoles,
-                    Tokens = adminUserTokens,
                     PasswordHash = Constants.DefaultAdminPassword.ComputeSHA256Hash(),
                     Created = DateTime.Now,
                     Status = UserStatus.Verified,
@@ -162,14 +126,11 @@ namespace SmartDmsData
                     Email = "jiri.pragr@seznam.cz",
                     NormalizedEmail = "JIRI.PRAGR@SEZNAM.CZ",
                     EmailConfirmed = true,
-                    Logins = null,
                     TwoFactorEnabled = false,
                     PhoneNumber = "987654321",
                     PhoneNumberConfirmed = true,
                     AccessFailedCount = 0,
-                    Claims = adminUserClaims,
                     UserRoles = adminUserRoles,
-                    Tokens = adminUserTokens,
                     PasswordHash = Constants.DefaultAdminPassword.ComputeSHA256Hash(),
                     Created = DateTime.Now,
                     Status = UserStatus.Verified,
@@ -187,14 +148,11 @@ namespace SmartDmsData
                     Email = "sandra.nisterova@seznam.cz",
                     NormalizedEmail = "SANDRA.NISTEROVA@SEZNAM.CZ",
                     EmailConfirmed = true,
-                    Logins = null,
                     TwoFactorEnabled = false,
                     PhoneNumber = "666555444",
                     PhoneNumberConfirmed = true,
                     AccessFailedCount = 0,
-                    Claims = adminUserClaims,
                     UserRoles = adminUserRoles,
-                    Tokens = adminUserTokens,
                     PasswordHash = Constants.DefaultAdminPassword.ComputeSHA256Hash(),
                     Created = DateTime.Now,
                     Status = UserStatus.Verified,
@@ -240,31 +198,6 @@ namespace SmartDmsData
                     Added = DateTime.Now
                 };
                 modelBuilder.Entity<UserRole>().HasData(stylistUserRole2);
-            }
-            catch (Exception e)
-            {
-                throw new Exception("PrefillDatabase - UserRoles table prefill error: " + e.Message, e);
-            }
-
-            try
-            {
-                UserToken adminUserToken1 = new UserToken()
-                {
-                    Name = "Token1",
-                    UserId = adminUser1.Id,
-                    Value = "Token1",
-                    LoginProvider = "SmartDmsLoginProvider"
-                };
-                modelBuilder.Entity<UserToken>().HasData(adminUserToken1);
-
-                UserToken adminUserToken2 = new UserToken()
-                {
-                    Name = "Token2",
-                    UserId = adminUser2.Id,
-                    Value = "Token2",
-                    LoginProvider = "SmartDmsLoginProvider"
-                };
-                modelBuilder.Entity<UserToken>().HasData(adminUserToken2);
             }
             catch (Exception e)
             {
