@@ -47,7 +47,16 @@ namespace SmartDmsWeb
             services.AddGraphQL(o => { o.ExposeExceptions = false; })
                 .AddGraphTypes(ServiceLifetime.Scoped);
 
-            services.AddDefaultIdentity<User>().AddEntityFrameworkStores<SmartDmsDbContext>();
+            services.AddDefaultIdentity<User>(o => {
+                //o.Password.RequireDigit = false;
+                //o.Password.RequireLowercase = false;
+                //o.Password.RequireUppercase = false;
+                //o.Password.RequireNonAlphanumeric = false;
+                o.Password.RequiredLength = 3;
+                })
+                .AddRoles<Role>()
+                .AddEntityFrameworkStores<SmartDmsDbContext>()
+                .AddDefaultTokenProviders();
             services.AddIdentityServer().AddApiAuthorization<User, SmartDmsDbContext>();
             services.AddAuthentication().AddIdentityServerJwt();
             services.AddControllersWithViews();
@@ -74,6 +83,8 @@ namespace SmartDmsWeb
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            SmartDmsDbSeed.Initialize(app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope().ServiceProvider).Wait();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
