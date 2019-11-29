@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 using SmartDmsCommon.Extensions;
@@ -8,8 +9,11 @@ using SmartDmsData.Enums;
 
 namespace SmartDmsData.Entities
 {
-    public class DocumentDataBox : BaseEntity
+    public class DocumentDataBox
     {
+        [ForeignKey(nameof(Document))]
+        public string Id { get; set; } // PK and FK pointing to Document
+
         /**
          * Inherited document entity.
          */
