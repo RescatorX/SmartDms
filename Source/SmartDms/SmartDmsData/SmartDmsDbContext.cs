@@ -25,6 +25,7 @@ namespace SmartDmsData
 
         public DbSet<AuditTrail> AuditTrails { get; set; }
         public DbSet<Document> Documents { get; set; }
+        public new DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

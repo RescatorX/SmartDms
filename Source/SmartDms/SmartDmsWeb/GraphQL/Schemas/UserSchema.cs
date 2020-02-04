@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 using GraphQL;
 using GraphQL.Types;
 
-namespace SmartDmsWeb.GraphQL
+namespace SmartDmsWeb.GraphQL.Schemas
 {
-    public class AppSchema : Schema
+    public class UserSchema : Schema
     {
-        public AppSchema(IDependencyResolver resolver)
+        public UserSchema(IDependencyResolver resolver)
             : base(resolver)
         {
-            Query = resolver.Resolve<AppQuery>();
+            Query = resolver.Resolve<UserQuery>();
         }
     }
 }

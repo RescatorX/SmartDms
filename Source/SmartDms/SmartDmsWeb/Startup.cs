@@ -16,8 +16,11 @@ using GraphQL.Server.Ui.Playground;
 
 using SmartDmsData;
 using SmartDmsData.Entities;
+using SmartDmsData.Repositories;
+using SmartDmsData.Repositories.Interfaces;
 using SmartDmsServices.Services;
 using SmartDmsServices.Interfaces;
+using SmartDmsWeb.GraphQL.Schemas;
 using SmartDmsWeb.GraphQL;
 using SmartDmsData.Repositories.Interfaces;
 using SmartDmsData.Repositories;
@@ -44,8 +47,10 @@ namespace SmartDmsWeb
 
             services.AddScoped<IUserRepository, UserRepository>();
 
+            services.AddScoped<IUserRepository, UserRepository>();
+
             services.AddScoped<IDependencyResolver>(s => new FuncDependencyResolver(s.GetRequiredService));
-            services.AddScoped<AppSchema>();
+            services.AddScoped<UserSchema>();
 
             services.AddGraphQL(o => { o.ExposeExceptions = false; })
                 .AddGraphTypes(ServiceLifetime.Scoped);
@@ -109,7 +114,7 @@ namespace SmartDmsWeb
                 endpoints.MapRazorPages();
             });
 
-            app.UseGraphQL<AppSchema>();
+            app.UseGraphQL<UserSchema>();
             app.UseGraphQLPlayground(options: new GraphQLPlaygroundOptions());
 
             app.UseSpa(spa =>
