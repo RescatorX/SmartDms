@@ -43,14 +43,33 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\components\index.ts" />
+    <None Remove="ClientApp\src\app\components\shared\index.ts" />
+    <None Remove="ClientApp\src\app\components\shared\notification-alert\index.ts" />
+    <None Remove="ClientApp\src\app\components\shared\notification-alert\notification-alert.component.ts" />
+    <None Remove="ClientApp\src\app\services\graphql.service.ts" />
+    <None Remove="ClientApp\src\app\types\index.ts" />
+    <None Remove="ClientApp\src\app\types\user.type.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\SmartDmsCommon\SmartDmsCommon.csproj" />
     <ProjectReference Include="..\SmartDmsData\SmartDmsData.csproj" />
     <ProjectReference Include="..\SmartDmsServices\SmartDmsServices.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\src\app\components\" />
     <Folder Include="Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\components\index.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\components\shared\index.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\components\shared\notification-alert\index.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\components\shared\notification-alert\notification-alert.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\graphql.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\types\index.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\types\user.type.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

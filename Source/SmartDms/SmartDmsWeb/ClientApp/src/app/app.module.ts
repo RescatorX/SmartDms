@@ -13,6 +13,9 @@ import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.
 import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
 
+import { ApolloModule } from 'apollo-angular';
+import { HttpLinkModule } from 'apollo-angular-link-http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +27,8 @@ import { AuthorizeInterceptor } from 'src/api-authorization/authorize.intercepto
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
+    ApolloModule,
+    HttpLinkModule,
     FormsModule,
     ApiAuthorizationModule,
     RouterModule.forRoot([
