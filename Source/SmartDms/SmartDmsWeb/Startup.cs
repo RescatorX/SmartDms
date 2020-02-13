@@ -21,6 +21,9 @@ using SmartDmsData.Repositories.Interfaces;
 using SmartDmsServices.Services;
 using SmartDmsServices.Interfaces;
 using SmartDmsWeb.GraphQL.Schemas;
+using SmartDmsWeb.GraphQL;
+using SmartDmsData.Repositories.Interfaces;
+using SmartDmsData.Repositories;
 
 namespace SmartDmsWeb
 {
@@ -41,7 +44,8 @@ namespace SmartDmsWeb
             services.AddSingleton<IAuditTrailService, AuditTrailService>();
             services.AddSingleton<IEmailSender, EmailSender>();
             services.AddSingleton<ISmsSender, SmsSender>();
-            services.AddSingleton<IUserService, UserService>();
+
+            services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddScoped<IUserRepository, UserRepository>();
 
