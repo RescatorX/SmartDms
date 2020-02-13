@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 
 using Microsoft.EntityFrameworkCore;
@@ -23,7 +24,14 @@ namespace SmartDmsData.Repositories
             return _db.Users;
         }
 
-        public User Add(User user)
+        public IEnumerable<User> GetUsers() => _db.Users.ToList();
+
+        public User GetUserById(string id)
+        {
+            return _db.Users.FirstOrDefault(u => u.Id == id);
+        }
+
+        public User CreateUser(User user)
         {
             _db.Users.Add(user);
             _db.SaveChanges();
@@ -31,6 +39,36 @@ namespace SmartDmsData.Repositories
             return user;
         }
 
-        public IEnumerable<User> GetAll() => _db.Users.ToList();
+        public User UpdateUser(User user)
+        {
+            User updatingUser = _db.Users.FirstOrDefault(u => u.Id == user.Id);
+            if (updatingUser != null)
+            {
+                _db.Update<User>(user);
+                _db.SaveChanges();
+
+                return user;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public User DeleteUser(string userId)
+        {
+            User deletingUser = _db.Users.FirstOrDefault(u => u.Id == userId);
+            if (deletingUser != null)
+            {
+                _db.Remove<User>(deletingUser);
+                _db.SaveChanges();
+
+                return deletingUser;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

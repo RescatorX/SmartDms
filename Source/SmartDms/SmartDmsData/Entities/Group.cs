@@ -7,19 +7,18 @@ using SmartDmsData.Enums;
 
 namespace SmartDmsData.Entities
 {
-    public class User : Microsoft.AspNetCore.Identity.IdentityUser
+    public class Group : BaseEntity
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public DateTime Created { get; set; }
-        public UserStatus Status { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public Group ParentGroup { get; set; }
+        public RoleStatus Status { get; set; }
 
-        public virtual ICollection<UserRole> UserRoles { get; set; }
         public virtual ICollection<UserGroup> UserGroups { get; set; }
 
         public override string ToString()
         {
-            return "User: [ Id=" + this.Id
+            return "Group: [ Id=" + this.Id
                 + " ]";
         }
     }

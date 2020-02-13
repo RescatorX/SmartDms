@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using GraphQL;
 using GraphQL.Types;
 
+using SmartDmsWeb.GraphQL.Mutations;
+using SmartDmsWeb.GraphQL.Queries;
+
 namespace SmartDmsWeb.GraphQL.Schemas
 {
     public class UserSchema : Schema
@@ -14,6 +17,7 @@ namespace SmartDmsWeb.GraphQL.Schemas
             : base(resolver)
         {
             Query = resolver.Resolve<UserQuery>();
+            Mutation = resolver.Resolve<UserMutation>();
         }
     }
 }

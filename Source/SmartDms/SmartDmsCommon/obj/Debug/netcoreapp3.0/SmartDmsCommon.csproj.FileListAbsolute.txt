@@ -5,3 +5,4 @@ C:\Work\SmartDms\Source\SmartDms\SmartDmsCommon\obj\Debug\netcoreapp3.0\SmartDms
 C:\Work\SmartDms\Source\SmartDms\SmartDmsCommon\obj\Debug\netcoreapp3.0\SmartDmsCommon.AssemblyInfo.cs
 C:\Work\SmartDms\Source\SmartDms\SmartDmsCommon\obj\Debug\netcoreapp3.0\SmartDmsCommon.dll
 C:\Work\SmartDms\Source\SmartDms\SmartDmsCommon\obj\Debug\netcoreapp3.0\SmartDmsCommon.pdb
+C:\Work\SmartDms\Source\SmartDms\SmartDmsCommon\obj\Debug\netcoreapp3.0\SmartDmsCommon.csprojAssemblyReference.cache
