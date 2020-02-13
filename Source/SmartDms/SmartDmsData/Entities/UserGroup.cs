@@ -14,6 +14,10 @@ namespace SmartDmsData.Entities
         public virtual User User { get; set; }
         public virtual Group Group { get; set; }
 
+        public virtual string UserId { get; set; }
+
+        public virtual string GroupId { get; set; }
+
         public override string ToString()
         {
             return "UserGroup: [ Id=" + this.Id

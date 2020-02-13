@@ -12,16 +12,16 @@ namespace SmartDmsWeb.GraphQL.Types
         public UserType()
         {
             Field(x => x.Id, type: typeof(IdGraphType)).Description("Id property from the user object.");
-            Field(x => x.FirstName).Description("FirstName property from the user object.");
-            Field(x => x.LastName).Description("LastName property from the user object.");
-            Field(x => x.UserName).Description("UserName property from the user object.");
-            Field(x => x.Email).Description("Email property from the user object.");
-            Field(x => x.PhoneNumber).Description("PhoneNumber property from the user object.");
-            Field(x => x.AccessFailedCount).Description("AccessFailedCount property from the user object.");
-            Field(x => x.Created).Description("Created property from the user object.");
-            Field(x => x.Status).Description("Status property from the user object.");
-            Field(x => x.UserRoles).Description("UserRoles property from the user object.");
-            Field(x => x.UserGroups).Description("UserGroups property from the user object.");
+            Field(x => x.FirstName, type: typeof(StringGraphType)).Description("FirstName property from the user object.");
+            Field(x => x.LastName, type: typeof(StringGraphType)).Description("LastName property from the user object.");
+            Field(x => x.UserName, type: typeof(StringGraphType)).Description("UserName property from the user object.");
+            Field(x => x.Email, type: typeof(StringGraphType)).Description("Email property from the user object.");
+            Field(x => x.PhoneNumber, type: typeof(StringGraphType)).Description("PhoneNumber property from the user object.");
+            Field(x => x.AccessFailedCount, type: typeof(DecimalGraphType)).Description("AccessFailedCount property from the user object.");
+            Field(x => x.Created, type: typeof(DateTimeGraphType)).Description("Created property from the user object.");
+            Field(x => x.Status, type: typeof(UserStatusType)).Description("Status property from the user object.");
+            Field(x => x.UserRoles, type: typeof(ListGraphType<UserRoleType>)).Description("UserRoles property from the user object.");
+            Field(x => x.UserGroups, type: typeof(ListGraphType<UserGroupType>)).Description("UserGroups property from the user object.");
         }
     }
 }
