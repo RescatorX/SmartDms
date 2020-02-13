@@ -2164,10 +2164,7 @@
         },
         "runtime": {
           "bin/placeholder/SmartDmsData.dll": {}
-        },
-        "frameworkReferences": [
-          "Microsoft.AspNetCore.App"
-        ]
+        }
       }
     }
   },

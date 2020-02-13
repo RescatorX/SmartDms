@@ -12,8 +12,14 @@ namespace SmartDmsData.Repositories.Interfaces
     {
         DbSet<User> GetQuery();
 
-        User Add(User user);
+        IEnumerable<User> GetUsers();
 
-        IEnumerable<User> GetAll();
+        User GetUserById(string id);
+
+        User CreateUser(User user);
+
+        User UpdateUser(User user);
+
+        User DeleteUser(string userId);
     }
 }
