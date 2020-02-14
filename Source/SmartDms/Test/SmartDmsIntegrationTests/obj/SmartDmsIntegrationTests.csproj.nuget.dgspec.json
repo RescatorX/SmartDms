@@ -42,6 +42,12 @@
       },
       "frameworks": {
         "netcoreapp3.0": {
+          "dependencies": {
+            "WorkflowCore.Users": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -120,7 +126,7 @@
           "dependencies": {
             "IdentityServer4.EntityFramework.Storage": {
               "target": "Package",
-              "version": "[3.0.2, )"
+              "version": "[3.1.1, )"
             },
             "Microsoft.AspNet.Identity.EntityFramework": {
               "target": "Package",
@@ -136,11 +142,11 @@
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[3.0.0, )"
+              "version": "[3.1.1, )"
             },
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
-              "version": "[3.0.0, )"
+              "version": "[3.1.1, )"
             },
             "Microsoft.AspNetCore.SpaServices.Extensions": {
               "target": "Package",
@@ -148,33 +154,33 @@
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[3.0.0, )"
+              "version": "[3.1.1, )"
             },
             "Microsoft.EntityFrameworkCore.Relational": {
               "target": "Package",
-              "version": "[3.0.0, )"
+              "version": "[3.1.1, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[3.0.0, )"
+              "version": "[3.1.1, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[3.0.0, )"
+              "version": "[3.1.1, )"
             },
             "System.Configuration.ConfigurationManager": {
               "target": "Package",
-              "version": "[4.6.0, )"
+              "version": "[4.7.0, )"
             },
             "WorkflowCore.Persistence.SqlServer": {
               "target": "Package",
-              "version": "[2.1.2, )"
+              "version": "[3.0.1, )"
             },
             "WorkflowCore.Users": {
               "target": "Package",
-              "version": "[2.0.0, )"
+              "version": "[2.1.0, )"
             }
           },
           "imports": [
@@ -258,6 +264,12 @@
       },
       "frameworks": {
         "netcoreapp3.0": {
+          "dependencies": {
+            "WorkflowCore.Users": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -365,11 +377,11 @@
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[3.0.0, )"
+              "version": "[3.1.1, )"
             },
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
-              "version": "[3.0.0, )"
+              "version": "[3.1.1, )"
             },
             "Microsoft.AspNetCore.SpaServices.Extensions": {
               "target": "Package",
@@ -377,23 +389,25 @@
             },
             "Microsoft.EntityFrameworkCore.Relational": {
               "target": "Package",
-              "version": "[3.0.0, )"
+              "version": "[3.1.1, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[3.0.0, )"
+              "version": "[3.1.1, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
-              "version": "[3.0.0, )"
+              "version": "[3.1.1, )"
             },
             "Microsoft.Extensions.Logging.Debug": {
               "target": "Package",
-              "version": "[3.0.1, )"
+              "version": "[3.1.1, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[3.0.0, )"
+              "version": "[3.1.1, )"
             },
             "Serilog.Extensions.Logging": {
               "target": "Package",
@@ -421,7 +435,7 @@
             },
             "WorkflowCore.Users": {
               "target": "Package",
-              "version": "[2.0.0, )"
+              "version": "[2.1.0, )"
             }
           },
           "imports": [
@@ -518,19 +532,27 @@
           "dependencies": {
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
-              "version": "[16.2.0, )"
+              "version": "[16.5.0, )"
+            },
+            "WorkflowCore.Users": {
+              "target": "Package",
+              "version": "[2.1.0, )"
             },
             "coverlet.collector": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
-              "version": "[1.0.1, )"
+              "version": "[1.2.0, )"
             },
             "xunit": {
               "target": "Package",
-              "version": "[2.4.0, )"
+              "version": "[2.4.1, )"
             },
             "xunit.runner.visualstudio": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
-              "version": "[2.4.0, )"
+              "version": "[2.4.1, )"
             }
           },
           "imports": [
