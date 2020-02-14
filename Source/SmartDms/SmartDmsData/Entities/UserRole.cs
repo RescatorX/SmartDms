@@ -16,7 +16,7 @@ namespace SmartDmsData.Entities
 
         public override string ToString()
         {
-            return "UserRole: [ Id=" + this.Id
+            return "UserRole: [ UserId=" + this.UserId + ", RoleId= " + this.RoleId
                 + " ]";
         }
     }

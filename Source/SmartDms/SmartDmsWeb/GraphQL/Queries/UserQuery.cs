@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 
 using GraphQL.Types;
-
+using SmartDmsData.Entities;
 using SmartDmsData.Enums;
 using SmartDmsData.Repositories.Interfaces;
 using SmartDmsWeb.GraphQL.Types;
@@ -38,6 +39,14 @@ namespace SmartDmsWeb.GraphQL.Queries
                     {
                         Name = "email"
                     },
+                    new QueryArgument<StringGraphType>
+                    {
+                        Name = "phoneNumber"
+                    },
+                    new QueryArgument<DecimalGraphType>
+                    {
+                        Name = "accessFailedCount"
+                    },
                     new QueryArgument<DateGraphType>
                     {
                         Name = "created"
@@ -45,6 +54,14 @@ namespace SmartDmsWeb.GraphQL.Queries
                     new QueryArgument<UserStatusType>
                     {
                         Name = "status"
+                    },
+                    new QueryArgument<ListGraphType<UserRoleType>>
+                    {
+                        Name = "userRoles"
+                    },
+                    new QueryArgument<ListGraphType<UserGroupType>>
+                    {
+                        Name = "userGroups"
                     }
                 }),
                 resolve: context =>
@@ -54,46 +71,49 @@ namespace SmartDmsWeb.GraphQL.Queries
                     string userId = context.GetArgument<string>("id");
                     if (!string.IsNullOrEmpty(userId))
                     {
-                        return userRepository.GetQuery().Where(r => r.Id == userId);
+                        return userRepository.GetQuery().Include(u => u.UserRoles).Include(u => u.UserGroups).Where(r => r.Id == userId);
                     }
 
                     string userFirstName = context.GetArgument<string>("firstName");
                     if (!string.IsNullOrEmpty(userFirstName))
                     {
-                        return userRepository.GetQuery().Where(r => r.FirstName == userFirstName);
+                        return userRepository.GetQuery().Include(u => u.UserRoles).Include(u => u.UserGroups).Where(r => r.FirstName == userFirstName);
                     }
 
                     string userLastName = context.GetArgument<string>("lastName");
                     if (!string.IsNullOrEmpty(userLastName))
                     {
-                        return userRepository.GetQuery().Where(r => r.LastName == userLastName);
+                        return userRepository.GetQuery().Include(u => u.UserRoles).Include(u => u.UserGroups).Where(r => r.LastName == userLastName);
                     }
 
                     string userUserName = context.GetArgument<string>("userName");
                     if (!string.IsNullOrEmpty(userUserName))
                     {
-                        return userRepository.GetQuery().Where(r => r.UserName == userUserName);
+                        return userRepository.GetQuery().Include(u => u.UserRoles).Include(u => u.UserGroups).Where(r => r.UserName == userUserName);
                     }
 
                     string userEmail = context.GetArgument<string>("email");
                     if (!string.IsNullOrEmpty(userEmail))
                     {
-                        return userRepository.GetQuery().Where(r => r.Email == userEmail);
+                        return userRepository.GetQuery().Include(u => u.UserRoles).Include(u => u.UserGroups).Where(r => r.Email == userEmail);
                     }
 
                     DateTime? userCreated = context.GetArgument<DateTime?>("created");
                     if (userCreated.HasValue)
                     {
-                        return userRepository.GetQuery().Where(r => r.Created.Date == userCreated.Value.Date);
+                        return userRepository.GetQuery().Include(u => u.UserRoles).Include(u => u.UserGroups).Where(r => r.Created.Date == userCreated.Value.Date);
                     }
 
                     UserStatus? userStatus = context.GetArgument<UserStatus?>("status");
                     if (userStatus.HasValue)
                     {
-                        return userRepository.GetQuery().Where(r => r.Status == userStatus.Value);
+                        return userRepository.GetQuery().Include(u => u.UserRoles).Include(u => u.UserGroups).Where(r => r.Status == userStatus.Value);
                     }
 
-                    return query.ToList();
+                    List<User> users = query.ToList();
+                    users = query.Include(u => u.UserRoles).Where(u => u.UserRoles.Any(r => ((r.User == u)))).ToList();
+
+                    return users;
                 }
             );
 

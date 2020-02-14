@@ -24,11 +24,11 @@ namespace SmartDmsData.Repositories
             return _db.Users;
         }
 
-        public IEnumerable<User> GetUsers() => _db.Users.ToList();
+        public IEnumerable<User> GetUsers() => _db.Users.Include(u => u.UserRoles).Where(u => u.UserRoles.Any(r => ((r.User == u)))).ToArray();// _db.Users.Include(u => u.UserRoles).Include(u => u.UserGroups).ToList();
 
         public User GetUserById(string id)
         {
-            return _db.Users.FirstOrDefault(u => u.Id == id);
+            return _db.Users.Include(u => u.UserRoles).Include(u => u.UserGroups).FirstOrDefault(u => u.Id == id);
         }
 
         public User CreateUser(User user)

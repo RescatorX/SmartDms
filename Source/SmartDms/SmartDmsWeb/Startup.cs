@@ -46,9 +46,6 @@ namespace SmartDmsWeb
             services.AddSingleton<ISmsSender, SmsSender>();
 
             services.AddScoped<IUserRepository, UserRepository>();
-
-            services.AddScoped<IUserRepository, UserRepository>();
-
             services.AddScoped<IDependencyResolver>(s => new FuncDependencyResolver(s.GetRequiredService));
             services.AddScoped<UserSchema>();
 

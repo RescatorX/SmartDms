@@ -56,7 +56,7 @@ namespace SmartDmsWeb.GraphQL.Queries
                     {
                         return documentRepository.GetQuery().Where(r => r.Id == userId);
                     }
-
+/*
                     string userFirstName = context.GetArgument<string>("firstName");
                     if (!string.IsNullOrEmpty(userFirstName))
                     {
@@ -92,7 +92,7 @@ namespace SmartDmsWeb.GraphQL.Queries
                     {
                         return documentRepository.GetQuery().Where(r => r.Status == userStatus.Value);
                     }
-
+*/
                     return query.ToList();
                 }
             );

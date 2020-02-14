@@ -27,7 +27,7 @@ export class UserService {
     constructor(private http: HttpClient, private logService: LogService) {
         this.user$ = <BehaviorSubject<UserEntity>>new BehaviorSubject(new UserEntity({}));
     }
-
+/*
     loadUser(log: LogEntity, userName: string): Observable<UserEntity> {
         this.userName = userName;
         let currentUser = null;
@@ -107,9 +107,6 @@ export class UserService {
         return this.http.get<UserEntity[]>(this.serviceAllUsersUrl);
     }
 
-    /**
-     * init observable collection $users
-     */
     loadUsers(log: LogEntity): Observable<UserEntity[]> {
         if (!this.users$) {
             this.users$ = <BehaviorSubject<UserEntity[]>>new BehaviorSubject(new UserEntityCollection());
@@ -120,10 +117,6 @@ export class UserService {
         return this.users$.asObservable();
     }
 
-    /**
-     * update user in db and return his updated version in promise
-     * returns reference to updatedUser in collection (not result from server)
-     */
     updateUser(log: LogEntity, updatingUser: UserEntity): Promise<UserEntity> {
         this.logService.log(log);
 
@@ -162,5 +155,6 @@ export class UserService {
             this.logService.log(log);
             return this.http.get<boolean>(url);
         };
-    }
+}
+*/
 }
