@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="WorkflowCore.Users" Version="2.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\SmartDmsCommon\SmartDmsCommon.csproj" />
     <ProjectReference Include="..\SmartDmsData\SmartDmsData.csproj" />
   </ItemGroup>
