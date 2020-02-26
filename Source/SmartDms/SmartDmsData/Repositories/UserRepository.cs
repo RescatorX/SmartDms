@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity.Migrations;
 using System.Linq;
 
 using Microsoft.EntityFrameworkCore;
@@ -26,7 +25,7 @@ namespace SmartDmsData.Repositories
 
         public IEnumerable<User> GetUsers() => _db.Users.Include(u => u.UserRoles).Where(u => u.UserRoles.Any(r => ((r.User == u)))).ToArray();// _db.Users.Include(u => u.UserRoles).Include(u => u.UserGroups).ToList();
 
-        public User GetUserById(string id)
+        public User GetUserById(Guid id)
         {
             return _db.Users.Include(u => u.UserRoles).Include(u => u.UserGroups).FirstOrDefault(u => u.Id == id);
         }
@@ -55,7 +54,7 @@ namespace SmartDmsData.Repositories
             }
         }
 
-        public User DeleteUser(string userId)
+        public User DeleteUser(Guid userId)
         {
             User deletingUser = _db.Users.FirstOrDefault(u => u.Id == userId);
             if (deletingUser != null)

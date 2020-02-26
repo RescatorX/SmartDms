@@ -1,7 +1,22 @@
-﻿################################################################################
+################################################################################
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
 /.vs
 /Source/SmartDms/.vs/SmartDms
-/Source/SmartDms/SmartDmsCommon/obj/Debug/netcoreapp3.0/SmartDmsCommon.csprojAssemblyReference.cache
+/Source/SmartDms/SmartDmsCommon/obj/
+/Source/SmartDms/SmartDmsCommon/bin/
+/Source/SmartDms/SmartDmsData/obj
+/Source/SmartDms/SmartDmsData/bin
+/Source/SmartDms/SmartDmsServices/obj
+/Source/SmartDms/SmartDmsServices/bin
+/Source/SmartDms/SmartDmsWeb/obj
+/Source/SmartDms/SmartDmsWeb/bin
+/Source/SmartDms/Test/SmartDmsIntegrationTests/bin
+/Source/SmartDms/Test/SmartDmsIntegrationTests/obj
+/Source/SmartDms/Test/SmartDmsUnitTests/bin
+/Source/SmartDms/Test/SmartDmsUnitTests/obj
+
+/SmartDmsCommon/obj/
+/SmartDmsCommon/bin/
+                                    .

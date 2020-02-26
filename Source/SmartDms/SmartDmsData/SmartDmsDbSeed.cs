@@ -40,7 +40,7 @@ namespace SmartDmsData
             {
                 User user = new User()
                 {
-                    Id = Guid.NewGuid().ToString("D"),
+                    Id = Guid.NewGuid(),
                     Email = "info@smartdms.cz",
                     SecurityStamp = Guid.NewGuid().ToString(),
                     UserName = "SmartAdmin",

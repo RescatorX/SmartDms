@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNetCore.Identity;
-
-using SmartDmsData.Enums;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SmartDmsData.Entities
 {
@@ -11,12 +7,13 @@ namespace SmartDmsData.Entities
     {
         public DateTime Added { get; set; }
 
+        [ForeignKey("User")]
+        public Guid UserId { get; set; }
         public virtual User User { get; set; }
+
+        [ForeignKey("Group")]
+        public Guid GroupId { get; set; }
         public virtual Group Group { get; set; }
-
-        public virtual string UserId { get; set; }
-
-        public virtual string GroupId { get; set; }
 
         public override string ToString()
         {

@@ -14,12 +14,12 @@ namespace SmartDmsData.Repositories.Interfaces
 
         IEnumerable<User> GetUsers();
 
-        User GetUserById(string id);
+        User GetUserById(Guid id);
 
         User CreateUser(User user);
 
         User UpdateUser(User user);
 
-        User DeleteUser(string userId);
+        User DeleteUser(Guid userId);
     }
 }

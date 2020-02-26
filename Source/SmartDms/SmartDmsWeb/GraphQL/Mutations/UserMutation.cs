@@ -61,7 +61,7 @@ namespace SmartDmsWeb.GraphQL.Mutations
             resolve: context =>
             {
                 User deletedUser = null;
-                string deletingUserId = context.GetArgument<string>("userId");
+                Guid deletingUserId = Guid.Parse(context.GetArgument<string>("userId"));
                 if (deletingUserId == null)
                 {
                     context.Errors.Add(new ExecutionError("Error getting deleting user ID"));
