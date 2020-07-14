@@ -32,7 +32,7 @@
     "core-js": "^2.6.5",
     "graphql": "^14.6.0",
     "graphql-tag": "^2.10.3",
-    "jquery": "3.4.1",
+    "jquery": "3.5.0",
     "ng2-charts": "^2.3.0",
     "ngx-bootstrap": "^5.6.1",
     "oidc-client": "^1.9.0",
