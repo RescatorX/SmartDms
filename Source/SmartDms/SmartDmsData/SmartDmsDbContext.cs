@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-
+using System.Threading.Tasks;
+using IdentityServer4.EntityFramework.Entities;
+using IdentityServer4.EntityFramework.Interfaces;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,7 +16,7 @@ using SmartDmsData.Enums;
 
 namespace SmartDmsData
 {
-    public class SmartDmsDbContext : IdentityDbContext<User, Role, Guid, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>
+    public class SmartDmsDbContext : IdentityDbContext<User, Role, Guid, Entities.UserClaim, UserRole, UserLogin, RoleClaim, UserToken>, IPersistedGrantDbContext
     {
         public SmartDmsDbContext(DbContextOptions<SmartDmsDbContext> options)
             : base(options)
@@ -23,6 +25,8 @@ namespace SmartDmsData
 
         public DbSet<AuditTrail> AuditTrails { get; set; }
         public DbSet<Document> Documents { get; set; }
+        public DbSet<PersistedGrant> PersistedGrants { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public DbSet<DeviceFlowCodes> DeviceFlowCodes { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -133,7 +137,7 @@ namespace SmartDmsData
                 throw new Exception("PrefillDatabase - Groups table prefill error: " + e.Message, e);
             }
 
-            List<UserClaim> adminUserClaims = new List<UserClaim>();
+            List<Entities.UserClaim> adminUserClaims = new List<Entities.UserClaim>();
             List<UserToken> adminUserTokens = new List<UserToken>();
             List<UserRole> adminUserRoles = new List<UserRole>();
             List<UserGroup> adminUserGroups = new List<UserGroup>();
@@ -236,6 +240,11 @@ namespace SmartDmsData
             IServiceCollection serviceCollection = new ServiceCollection();
             serviceCollection.AddLogging(builder => builder.AddConsole().AddFilter(DbLoggerCategory.Database.Command.Name, LogLevel.Information));
             return serviceCollection.BuildServiceProvider().GetService<ILoggerFactory>();
+        }
+
+        public Task<int> SaveChangesAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,0 +1,15 @@
+<<div class="animated fadeIn chart-div" (click)="chartClicked($event)" (chartHover)="chartHovered($event)">
+
+    <p class="text-muted text-uppercase font-weight-bold">{{title}}</p>
+    <div class="chart chart-margin">
+        <canvas baseChart width="chartWidth" height="chartHeight" class="chart"
+            [datasets]="chartData"
+            [labels]="chartLabels"
+            [options]="chartOptions"
+            [colors]="chartColors"
+            [legend]="chartLegend"
+            [chartType]="chartType">
+        </canvas>
+    </div>
+
+  </div>

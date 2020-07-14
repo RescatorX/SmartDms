@@ -61,7 +61,7 @@ namespace SmartDmsWeb
             services.AddIdentity<User, Role>()
                 .AddEntityFrameworkStores<SmartDmsDbContext>()
                 .AddDefaultTokenProviders();
-            //services.AddIdentityServer().AddApiAuthorization<User, SmartDmsDbContext>();
+            services.AddIdentityServer().AddApiAuthorization<User, SmartDmsDbContext>();
             services.AddAuthentication().AddIdentityServerJwt();
             services.AddControllersWithViews();
             services.AddRazorPages();

@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/map';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BaseEnumCollectionEntity } from '../entities/base-enum.entity';
 import { Utils } from '../code/utils';
 
-import * as resource from "./../../assets/data/resource-data-cs.json";
-import * as config from "./../../assets/data/config-data.json";
-import { BehaviorSubject } from 'rxjs';
-// var resource = require("./../../assets/data/resource-data-cs.json");
+import * as resource from '../../assets/data/resource-data-cs.json';
+import * as config from '../../assets/data/config-data.json';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable()
 export class ConfigService {
@@ -46,18 +45,11 @@ export class ConfigService {
         this.getResources();
         //let kmcUser: string = (this.http.request.prototype as XMLHttpRequest).getResponseHeader("kmc_user");
     }
-
-    public getData(): Observable<BaseEnumCollectionEntity> {
-        if (this.data) {
-            return Observable.of(this.data);
-        } else if(!this.data$) {
-            this.data$ = this.http.get(this.url).share().map(d => {
-                this.data = new BaseEnumCollectionEntity(d as {}[]);
-                return this.data;
-            });
-        }
-        return this.data$;
+  
+    public getData() {
+      return this.http.get(this.url);
     }
+
     public getResources() {
         // this.http.get(this.resUrl).subscribe(d => {
         //     this.res = d;
@@ -76,7 +68,7 @@ export class ConfigService {
      */
     public getValue(key: string): Observable<string> {
         let value = this.getData().map(d => {
-            let item = d.getByKeyFirst(key);
+          let item = null;//d.getByKeyFirst(key);
             return ((item != null) ? item.value : null);
             //d.getByKeyFirst(key).value;
         });
@@ -87,8 +79,8 @@ export class ConfigService {
     //Doesnt work with value types (number)
     //this.configService.setValue("dataTable.pageSize", object);
     public setValue(key: string, propertyToSet) {
-        this.getData().subscribe(
-            d => propertyToSet = d.getByKeyFirst(key).value
+      this.getData().subscribe(
+        d => propertyToSet = null//d.getByKeyFirst(key).value
         );
         //aaa
     }
@@ -106,7 +98,7 @@ export class ConfigService {
 
         let val = (this.config as Array<{}>).find(c => c["code"] == key)["value"];
         return val;
-    }
+  }
 
     /**
      * podle slovníku přeloží text

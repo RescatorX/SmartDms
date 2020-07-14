@@ -4,13 +4,15 @@ import { HttpClient } from '@angular/common/http';
 import { Utils } from '../code/utils';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { LogService } from './log.service';
+import 'rxjs/add/operator/share';
+import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class UserService {
+
     public userName: string;
     public user: UserEntity = new UserEntity({});
-    public users$: BehaviorSubject<UserEntity[]>;
-    public user$: BehaviorSubject<UserEntity>;
+    public users: UserEntity[];
 
     serviceIdentUrl = "/api/spring/users/findByIdent/{ident}";
     serviceUrl = "/api/users/{user}";
@@ -25,9 +27,9 @@ export class UserService {
     public readonly defaultPassword: string = "Nimda2018*";
 
     constructor(private http: HttpClient, private logService: LogService) {
-        this.user$ = <BehaviorSubject<UserEntity>>new BehaviorSubject(new UserEntity({}));
+        this.user = new UserEntity({});
     }
-/*
+
     loadUser(log: LogEntity, userName: string): Observable<UserEntity> {
         this.userName = userName;
         let currentUser = null;
@@ -37,12 +39,11 @@ export class UserService {
         if ((currentUser == null) || (currentUser != userName)) {
             this.getUser(log, userName).subscribe(user => {
                 this.user = UserEntity.Init(user);
-                this.user$.next(this.user);
             }, (error) => {
                 throw ("No such user '" + userName + "'");
             })
         }
-        return this.user$.asObservable();
+        return Observable.of(this.user);
     }
 
     getUser(log: LogEntity, userName: string): Observable<UserEntity> {
@@ -96,9 +97,9 @@ export class UserService {
 
     getUsers(log: LogEntity): Observable<UserEntity[]> {
         this.logService.log(log);
-        return this.http.get<UserEntity[]>(this.serviceUsersUrl + "?limit=100&sort=ORDER%20BY%20surname%20ASC").share().map(data => {
-            let users = new UserEntityCollection(data, { keyProperty: "name", valueProperty: "name", dataProperty: "this" });
-            return users;
+        return this.http.get<UserEntity[]>(this.serviceUsersUrl + "?limit=100&sort=ORDER%20BY%20surname%20ASC").map(data => {
+            this.users = data;
+            return this.users;
         });
     }
 
@@ -108,31 +109,18 @@ export class UserService {
     }
 
     loadUsers(log: LogEntity): Observable<UserEntity[]> {
-        if (!this.users$) {
-            this.users$ = <BehaviorSubject<UserEntity[]>>new BehaviorSubject(new UserEntityCollection());
-            this.getUsers(log).subscribe(users => {
-                this.users$.next(users);
-            })
-        }
-        return this.users$.asObservable();
+        this.users = [];
+        this.getUsers(log).subscribe(users => {
+            this.users = users;
+        })
+        return Observable.of(this.users);
     }
 
     updateUser(log: LogEntity, updatingUser: UserEntity): Promise<UserEntity> {
         this.logService.log(log);
 
         let url = Utils.Replace(this.serviceUrl, { user: updatingUser.userName });
-        return this.http.put<UserEntity>(url, updatingUser).map(updatedUser => {
-            if (this.users$) {
-                let users = this.users$.getValue();
-                let updatedUserInCollection = users.updateEntity(updatingUser) as UserEntity;
-                this.users$.next(users); //vyvolani zmeny
-                if (updatedUserInCollection.id == this.user.id) {
-                    this.user = updatedUserInCollection;
-                    this.user$.next(this.user);
-                }
-                return updatedUserInCollection;
-            }
-        }).toPromise();
+        return this.http.put<UserEntity>(url, updatingUser).toPromise();
     }
 
     updatePassword(log: LogEntity, updatingUser: UserEntity): Promise<UserEntity> {
@@ -142,9 +130,6 @@ export class UserService {
     createUser(log: LogEntity, user: UserEntity): Promise<UserEntity> {
         this.logService.log(log);
         return this.http.post<UserEntity>(this.serviceUsersUrl, user).map(user => {
-            let users = this.users$.getValue();
-            users.push(user);
-            this.users$.next(users);
             return user;
         }).toPromise()
     }
@@ -155,6 +140,5 @@ export class UserService {
             this.logService.log(log);
             return this.http.get<boolean>(url);
         };
-}
-*/
+    }
 }

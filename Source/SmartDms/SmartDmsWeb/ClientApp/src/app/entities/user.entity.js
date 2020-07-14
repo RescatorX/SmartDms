@@ -13,8 +13,9 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
+var base_entity_1 = require("./base.entity");
+var base_enum_entity_1 = require("./base-enum.entity");
 var role_entity_1 = require("./role.entity");
-var _1 = require(".");
 var UserEntity = /** @class */ (function (_super) {
     __extends(UserEntity, _super);
     function UserEntity(obj) {
@@ -42,9 +43,9 @@ var UserEntity = /** @class */ (function (_super) {
     });
     UserEntity.Init = function (user) {
         var userEntity = new UserEntity({});
-        _1.BaseEntity.copyProperties(user, userEntity);
+        base_entity_1.BaseEntity.copyProperties(user, userEntity);
         if (userEntity.rolesAll) {
-            userEntity.rolesStr = userEntity.rolesAll.join(_1.BaseEnumEntity.SEPARATOR);
+            userEntity.rolesStr = userEntity.rolesAll.join(base_enum_entity_1.BaseEnumEntity.SEPARATOR);
         }
         userEntity.isInicalized = true;
         return userEntity;
@@ -53,6 +54,6 @@ var UserEntity = /** @class */ (function (_super) {
         return a.userName == b.userName;
     };
     return UserEntity;
-}(_1.BaseEnumEntity));
+}(base_enum_entity_1.BaseEnumEntity));
 exports.UserEntity = UserEntity;
 //# sourceMappingURL=user.entity.js.map

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using SmartDmsCommon.Extensions;
+using SmartDmsData.Enums;
 
 namespace SmartDmsData.Entities
 {
@@ -14,6 +15,7 @@ namespace SmartDmsData.Entities
         public string Operation { get; set; }
         public string Detail { get; set; }
         public DateTime Created { get; set; }
+        public NotificationType NotificationType { get; set; }
 
         public override string ToString()
         {
@@ -23,6 +25,7 @@ namespace SmartDmsData.Entities
                 + ", Operation=" + this.Operation
                 + ", Detail=" + this.Detail
                 + ", Created=" + this.Created.ToCzString()
+                + ", NotificationType=" + this.NotificationType
                 + " ]";
         }
     }
