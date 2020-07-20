@@ -1,5 +1,6 @@
+import { BaseEntity } from "./base.entity";
+import { BaseEnumEntity } from "./base-enum.entity";
 import { RoleEntityCollection, RoleEntity } from "./role.entity";
-import { BaseEntity, BaseEnumEntity } from ".";
 import { extend } from "webdriver-js-extender";
 
 export interface IUser {
@@ -22,6 +23,7 @@ export class UserEntity extends BaseEnumEntity implements IUser {
     public password: string;
     public rolesAll: string[];
     public rolesStr: string;
+    public isChangePassword: boolean;
 
     constructor(obj: {}) {
         super();

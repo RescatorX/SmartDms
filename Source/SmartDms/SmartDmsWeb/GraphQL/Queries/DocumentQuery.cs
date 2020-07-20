@@ -51,8 +51,8 @@ namespace SmartDmsWeb.GraphQL.Queries
                 {
                     var query = documentRepository.GetQuery();
 
-                    string userId = context.GetArgument<string>("id");
-                    if (!string.IsNullOrEmpty(userId))
+                    Guid userId = context.GetArgument<Guid>("id");
+                    if (userId != Guid.Empty)
                     {
                         return documentRepository.GetQuery().Where(r => r.Id == userId);
                     }

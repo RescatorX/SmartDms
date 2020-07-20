@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 
 using GraphQL.Types;
+using Microsoft.EntityFrameworkCore;
 using SmartDmsData.Entities;
 using SmartDmsData.Enums;
 using SmartDmsData.Repositories.Interfaces;
@@ -68,8 +67,8 @@ namespace SmartDmsWeb.GraphQL.Queries
                 {
                     var query = userRepository.GetQuery();
 
-                    string userId = context.GetArgument<string>("id");
-                    if (!string.IsNullOrEmpty(userId))
+                    Guid userId = context.GetArgument<Guid>("id");
+                    if (userId != Guid.Empty)
                     {
                         return userRepository.GetQuery().Include(u => u.UserRoles).Include(u => u.UserGroups).Where(r => r.Id == userId);
                     }
@@ -110,8 +109,7 @@ namespace SmartDmsWeb.GraphQL.Queries
                         return userRepository.GetQuery().Include(u => u.UserRoles).Include(u => u.UserGroups).Where(r => r.Status == userStatus.Value);
                     }
 
-                    List<User> users = query.ToList();
-                    users = query.Include(u => u.UserRoles).Where(u => u.UserRoles.Any(r => ((r.User == u)))).ToList();
+                    List<User> users = query.Include(u => u.UserRoles).ThenInclude(ur => ur.Role).Include(u => u.UserGroups).ThenInclude(ug => ug.Group).ToList();
 
                     return users;
                 }

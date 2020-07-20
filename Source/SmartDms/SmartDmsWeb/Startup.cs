@@ -2,8 +2,6 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -21,9 +19,6 @@ using SmartDmsData.Repositories.Interfaces;
 using SmartDmsServices.Services;
 using SmartDmsServices.Interfaces;
 using SmartDmsWeb.GraphQL.Schemas;
-using SmartDmsWeb.GraphQL;
-using SmartDmsData.Repositories.Interfaces;
-using SmartDmsData.Repositories;
 
 namespace SmartDmsWeb
 {
@@ -51,7 +46,7 @@ namespace SmartDmsWeb
 
             services.AddGraphQL(o => { o.ExposeExceptions = false; })
                 .AddGraphTypes(ServiceLifetime.Scoped);
-
+/*
             services.AddDefaultIdentity<User>(o => {
                 //o.Password.RequireDigit = false;
                 //o.Password.RequireLowercase = false;
@@ -60,6 +55,10 @@ namespace SmartDmsWeb
                 o.Password.RequiredLength = 3;
                 })
                 .AddRoles<Role>()
+                .AddEntityFrameworkStores<SmartDmsDbContext>()
+                .AddDefaultTokenProviders();
+*/
+            services.AddIdentity<User, Role>()
                 .AddEntityFrameworkStores<SmartDmsDbContext>()
                 .AddDefaultTokenProviders();
             services.AddIdentityServer().AddApiAuthorization<User, SmartDmsDbContext>();
@@ -89,8 +88,6 @@ namespace SmartDmsWeb
                 app.UseHsts();
             }
 
-            SmartDmsDbSeed.Initialize(app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope().ServiceProvider).Wait();
-
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             if (!env.IsDevelopment())
@@ -101,7 +98,7 @@ namespace SmartDmsWeb
             app.UseRouting();
 
             app.UseAuthentication();
-            app.UseIdentityServer();
+            //app.UseIdentityServer();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {

@@ -14,15 +14,15 @@ export class GraphqlService {
 
   constructor(private apollo: Apollo, httpLink: HttpLink) {
     this.apollo.create({
-      link: httpLink.create({ uri: 'https://localhost:5001/graphql' }),
+      link: httpLink.create({ uri: 'https://localhost:44390/graphql' }),
       cache: new InMemoryCache()
     })
   }
 
   public getUsers = () => {
     this.apollo.query({
-      query: gql`query getUsers{
-      users{
+      query: gql`query getUsers {
+      users {
         id,
         firstNname,
         lastName
@@ -31,6 +31,25 @@ export class GraphqlService {
     }).subscribe(result => {
       this.users = result.data as UserType[];
       console.log(this.users);
+    })
+  }
+
+  public getUserByUserName = (userName: string) => {
+    this.apollo.query({
+      query: gql`query getUserByUserName($userName: userName) {
+      users(userName: $userName) {
+        id,
+        firstNname,
+        lastName
+      }
+    }`
+    }).subscribe(result => {
+      this.users = result.data as UserType[];
+      console.log(this.users);
+    }, error => {
+        console.log(JSON.stringify(error));
+    }, () => {
+        console.log("Hotovo");
     })
   }
 }

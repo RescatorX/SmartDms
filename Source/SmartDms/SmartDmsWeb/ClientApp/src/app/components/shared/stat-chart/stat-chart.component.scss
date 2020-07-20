@@ -1,0 +1,31 @@
+.clickable {
+  cursor: pointer;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.header-value {
+  color: black;
+}
+
+$move:rgb(192,127,0);
+$movealt:rgba(192,127,0,0.05);
+
+.action-move-alt {
+  color: $move;
+  font-weight: 200;
+}
+
+.action-move-alt:hover {
+  // background-color: $move;
+  // color:white;
+  font-weight: 600;
+  color: brown;
+}
+
+.chart-margin {
+  display: block;
+  margin-bottom: 30px;
+}

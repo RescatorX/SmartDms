@@ -13,7 +13,7 @@ namespace SmartDmsServices.Services
     {
         public async Task<AuditTrail> CreateAuditTrailAsync(SmartDmsDbContext db, User user, string title, string operation, string detail = null)
         {
-            AuditTrail at = new AuditTrail() { Id = Guid.NewGuid().ToString("D"), User = user, Title = title, Operation = operation, Detail = detail, Created = DateTime.Now };
+            AuditTrail at = new AuditTrail() { Id = Guid.NewGuid(), User = user, Title = title, Operation = operation, Detail = detail, Created = DateTime.Now };
             db.AuditTrails.Add(at);
             await db.SaveChangesAsync();
 

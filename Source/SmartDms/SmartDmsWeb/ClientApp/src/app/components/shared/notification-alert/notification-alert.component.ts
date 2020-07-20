@@ -3,8 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import * as $ from 'jquery';
 
 import { FormMode } from '../../../code';
-import { DocumentEntity, LogEntity } from '../../../entities';
-import { DocumentService, UiService } from '../../../services';
+import { DocumentEntity, LogEntity, NotificationEntity, NotificationLevel } from '../../../entities';
+//import { DocumentService, UiService } from '../../../services';
 import { NotificationService } from '../../../services';
 
 interface HashTable<T> {
@@ -18,12 +18,12 @@ interface HashTable<T> {
 })
 export class NotificationAlertComponent implements OnInit {
 
-  notifications: Notification[] = [];
+  notifications: NotificationEntity[] = [];
 
   constructor(private notificationService: NotificationService) { }
 
   ngOnInit() {
-    this.notificationService.getAlert().subscribe((alert: Notification) => {
+    this.notificationService.getAlert().subscribe((alert: NotificationEntity) => {
       this.notifications = [];
       if (!alert) {
         this.notifications = [];
@@ -36,23 +36,23 @@ export class NotificationAlertComponent implements OnInit {
     });
   }
 
-  removeNotification(notification: Notification) {
+  removeNotification(notification: NotificationEntity) {
     this.notifications = this.notifications.filter(x => x !== notification);
   }
 
   /**Set css class for Alert -- Called from alert component**/
-  cssClass(notification: Notification) {
+  cssClass(notification: NotificationEntity) {
     if (!notification) {
       return;
     }
-    switch (notification.type) {
-      case NotificationType.Success:
+    switch (notification.notificationLevel) {
+      case NotificationLevel.Success:
         return 'toast-success';
-      case NotificationType.Error:
+      case NotificationLevel.Error:
         return 'toast-error';
-      case NotificationType.Info:
+      case NotificationLevel.Info:
         return 'toast-info';
-      case NotificationType.Warning:
+      case NotificationLevel.Warning:
         return 'toast-warning';
     }
   }  

@@ -1,0 +1,871 @@
+<div class="row dashboard">
+
+  <div class="col-lg-6 col-xl-4 order-lg-1 order-xl-1">
+
+    <!--begin::Portlet-->
+    <div class="kt-portlet kt-portlet--height-fluid-half kt-widget-14">
+      <div class="kt-portlet__head kt-portlet__head--noborder">
+        <div class="kt-portlet__head-label">
+          <h3 class="kt-portlet__head-title">Úkoly</h3>
+        </div>
+        <div class="kt-portlet__head-toolbar">
+          <span class="nav-link-icon" style="font-size: 24px; color: #5d78ff"><i class="flaticon2-clip-symbol"></i></span>
+        </div>
+      </div>
+      <div class="kt-portlet__body kt-portlet__body--fluid">
+        <div class="kt-widget-19">
+          <div class="kt-widget-19__title" (click)="redirect('/tasks')" style="cursor: pointer;">
+            <div class="kt-widget-19__label">Máte {{dashboardData.taskCount}} úkolů</div>
+            <img class="kt-widget-19__bg" src="assets/template/media/misc/iconbox_bg.png" alt="bg" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--end::Portlet-->
+    <!--begin::Portlet-->
+    <div class="kt-portlet kt-portlet--height-fluid-half kt-widget-15">
+      <div class="kt-portlet__head kt-portlet__head--noborder">
+        <div class="kt-portlet__head-label">
+          <h3 class="kt-portlet__head-title">Reporty</h3>
+        </div>
+        <div class="kt-portlet__head-toolbar">
+          <span class="nav-link-icon" style="font-size: 24px; color: #5d78ff"><i class="flaticon2-graphic"></i></span>
+        </div>
+      </div>
+      <div class="kt-portlet__body kt-portlet__body--fluid">
+        <div class="kt-widget-19" style="display: block;">
+          <div class="kt-widget-19__title" (click)="redirect('/report2')" style="margin-top: -20px; text-align: left; display: block; cursor: pointer;">
+            <div class="kt-widget-19__label" style="font-size: 1.5rem;">Výpis uložených dokumentů</div>
+            <img class="kt-widget-19__bg" src="assets/template/media/misc/iconbox_bg.png" alt="bg" />
+          </div>
+          <div class="kt-widget-19__title" (click)="redirect('/report1')" style="margin-top: 10px; text-align: left; display: block; cursor: pointer;">
+            <div class="kt-widget-19__label" style="font-size: 1.5rem;">Sumární přehled</div>
+            <img class="kt-widget-19__bg" src="assets/template/media/misc/iconbox_bg.png" alt="bg" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--end::Portlet-->
+  </div>
+  <div class="col-lg-12 col-xl-8 order-lg-2 order-xl-2">
+
+    <!--begin::Portlet-->
+    <div class="kt-portlet kt-portlet--height-fluid kt-widget-13">
+      <div class="kt-portlet__body">
+        <div id="kt-widget-slider-invoice-income" class="kt-slider carousel slide" data-ride="carousel" data-interval="4000">
+          <div class="kt-slider__head">
+            <div class="kt-slider__label">Faktury přijaté</div>
+            <div class="kt-slider__nav">
+              <a class="kt-slider__nav-prev carousel-control-prev" href="#kt-widget-slider-invoice-income" role="button" data-slide="prev">
+                <i class="fa fa-angle-left"></i>
+              </a>
+              <a class="kt-slider__nav-next carousel-control-next" href="#kt-widget-slider-invoice-income" role="button" data-slide="next">
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </div>
+          </div>
+          <div class="carousel-inner" (click)="redirect('/invoiceIncome')">
+            <div class="carousel-item active kt-slider__body" style="height: 250px;">
+              <div class="kt-widget-13">
+                <div class="kt-widget-13__body">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="kt-widget-19__label" style="font-size: 1.5rem;">Máte celkem {{dashboardData.dashboardInvoice.count}} faktur přijatých</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item kt-slider__body" style="height: 250px;">
+              <div class="kt-widget-13">
+                <div class="kt-widget-13__body">
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                      <div class="kt-widget-19__title">
+                        <div class="kt-widget-19__label" style="font-size: 1.5rem;">
+                          <div class="row" style="margin-bottom: 15px;">
+                            <div class="col-md-12 col-lg-12 col-xl-12"><span>Poměr počtu faktur dle stavu pracovního procesu</span></div>
+                          </div>
+                          <div class="row" *ngFor="let invoiceIncomeByWFStateDataItem of invoiceIncomeByWFStateData">
+                            <div class="col-md-6 col-lg-6 col-xl-6 summary-item"><span class="summary-item">{{invoiceIncomeByWFStateDataItem.type}}</span></div>
+                            <div class="col-md-6 col-lg-6 col-xl-6 summary-item"><span class="summary-item">{{invoiceIncomeByWFStateDataItem.value}}</span></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                      <stat-chart *ngIf="sumsByWFStateLoaded" title="Dle stavu" chartWidth="200" chartHeight="100" [data]="invoiceIncomeByWFStateData" style="margin-top: -50px;"></stat-chart>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item kt-slider__body" style="height: 250px;">
+              <div class="kt-widget-13">
+                <div class="kt-widget-13__body">
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                      <div class="kt-widget-19__title">
+                        <div class="kt-widget-19__label" style="font-size: 1.5rem;">
+                          <div class="row" style="margin-bottom: 15px;">
+                            <div class="col-md-12 col-lg-12 col-xl-12"><span>Poměr počtu faktur dle dodavatele</span></div>
+                          </div>
+                          <div class="row" *ngFor="let invoiceIncomeBySupplierDataItem of invoiceIncomeBySupplierData">
+                            <div class="col-md-6 col-lg-6 col-xl-6 summary-item"><span class="summary-item">{{invoiceIncomeBySupplierDataItem.type}}</span></div>
+                            <div class="col-md-6 col-lg-6 col-xl-6 summary-item"><span class="summary-item">{{invoiceIncomeBySupplierDataItem.value}}</span></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                      <stat-chart *ngIf="sumsBySupplierLoaded" title="Dle dodavatele" chartWidth="400" chartHeight="200" [data]="invoiceIncomeBySupplierData" style="margin-top: -50px;"></stat-chart>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item kt-slider__body" style="height: 250px;">
+              <div class="kt-widget-13">
+                <div class="kt-widget-13__body">
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                      <div class="kt-widget-19__title">
+                        <div class="kt-widget-19__label" style="font-size: 1.5rem;">
+                          <div class="row" style="margin-bottom: 15px;">
+                            <div class="col-md-12 col-lg-12 col-xl-12"><span>Poměr počtu faktur dle měny</span></div>
+                          </div>
+                          <div class="row" *ngFor="let currencyItem of dashboardData.dashboardInvoice.currency">
+                            <div class="col-md-3 col-lg-2 col-xl-2 summary-item"><span class="summary-item">{{currencyItem.name}}</span></div>
+                            <div class="col-md-3 col-lg-2 col-xl-2 summary-item"><span class="summary-item">{{currencyItem.count}}</span></div>
+                            <div class="col-md-4 col-lg-4 col-xl-4 summary-item"><span class="summary-item"> ({{currencyItem.totalAmount}} {{currencyItem.name}})</span></div>
+                            <div class="col-md-2 col-lg-4 col-xl-4 summary-item"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                      <stat-chart *ngIf="sumsByCurrencyLoaded" title="Dle měny" chartWidth="400" chartHeight="200" [data]="invoiceIncomeByCurrencyData" style="margin-top: -50px;"></stat-chart>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--end::Portlet-->
+  </div>
+  <div class="col-lg-6 col-xl-4 order-lg-3 order-xl-3">
+
+    <!--begin::Portlet-->
+    <div class="kt-portlet kt-portlet--height-fluid-half kt-widget-14">
+      <div class="kt-portlet__head kt-portlet__head--noborder">
+        <div class="kt-portlet__head-label">
+          <h3 class="kt-portlet__head-title">Skartace</h3>
+        </div>
+        <div class="kt-portlet__head-toolbar">
+          <span class="nav-link-icon" style="font-size: 24px; color: #5d78ff"><i class="flaticon2-rubbish-bin"></i></span>
+        </div>
+      </div>
+      <div class="kt-portlet__body kt-portlet__body--fluid">
+        <div class="kt-widget-19" style="display: block;">
+          <div class="kt-widget-19__title" (click)="redirect('/shredding/true')" style="margin-top: -20px; text-align: left; display: block; cursor: pointer;">
+            <div class="kt-widget-19__label" style="font-size: 1.5rem;">Máte {{shreddingActiveCount}} aktivních skartací</div>
+            <img class="kt-widget-19__bg" src="assets/template/media/misc/iconbox_bg.png" alt="bg" />
+          </div>
+          <div class="kt-widget-19__title" (click)="redirect('/shredding/false')" style="margin-top: 10px; text-align: left; display: block; cursor: pointer;">
+            <div class="kt-widget-19__label" style="font-size: 1.5rem;">Máte {{shreddingFinishedCount}} dokončených skartací</div>
+            <img class="kt-widget-19__bg" src="assets/template/media/misc/iconbox_bg.png" alt="bg" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--end::Portlet-->
+    <!--begin::Portlet-->
+    <div class="kt-portlet kt-portlet--height-fluid-half kt-widget-15">
+      <div class="kt-portlet__head kt-portlet__head--noborder">
+        <div class="kt-portlet__head-label">
+          <h3 class="kt-portlet__head-title">Důvěryhodný archiv</h3>
+        </div>
+        <div class="kt-portlet__head-toolbar">
+          <span class="nav-link-icon" style="font-size: 24px; color: #5d78ff"><i class="flaticon2-open-box"></i></span>
+        </div>
+      </div>
+      <div class="kt-portlet__body kt-portlet__body--fluid">
+        <div class="kt-widget-19">
+          <div class="kt-widget-19__title" (click)="redirect('/trustedArchive')" style="margin-top: -20px; text-align: left; display: block; cursor: pointer;">
+            <div class="kt-widget-19__label" style="font-size: 1.5rem;">Máte {{taDocumentCount}} dokumentů v důvěryhodném archivu</div>
+            <img class="kt-widget-19__bg" src="assets/template/media/misc/iconbox_bg.png" alt="bg" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--end::Portlet-->
+  </div>
+  <div class="col-lg-12 col-xl-8 order-lg-4 order-xl-4">
+
+    <!--begin::Portlet-->
+    <div class="kt-portlet kt-portlet--height-fluid kt-widget-13">
+      <div class="kt-portlet__body">
+        <div id="kt-widget-slider-invoice-issued" class="kt-slider carousel slide" data-ride="carousel" data-interval="4000">
+          <div class="kt-slider__head">
+            <div class="kt-slider__label">Faktury vydané</div>
+            <div class="kt-slider__nav">
+              <a class="kt-slider__nav-prev carousel-control-prev" href="#kt-widget-slider-invoice-issued" role="button" data-slide="prev">
+                <i class="fa fa-angle-left"></i>
+              </a>
+              <a class="kt-slider__nav-next carousel-control-next" href="#kt-widget-slider-invoice-issued" role="button" data-slide="next">
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </div>
+          </div>
+          <div class="carousel-inner" (click)="redirect('/invoiceIssued')">
+            <div class="carousel-item active kt-slider__body" style="height: 250px;">
+              <div class="kt-widget-13">
+                <div class="kt-widget-13__body">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="kt-widget-19__label" style="font-size: 1.5rem;">Máte celkem {{dashboardData.dashboardInvoice.count}} faktur vydaných</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item kt-slider__body" style="height: 250px;">
+              <div class="kt-widget-13">
+                <div class="kt-widget-13__body">
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                      <div class="kt-widget-19__title">
+                        <div class="kt-widget-19__label" style="font-size: 1.5rem;">
+                          <div class="row" style="margin-bottom: 15px;">
+                            <div class="col-md-12 col-lg-12 col-xl-12"><span>Poměr počtu faktur dle stavu pracovního procesu</span></div>
+                          </div>
+                          <div class="row" *ngFor="let invoiceIncomeByWFStateDataItem of invoiceIncomeByWFStateData">
+                            <div class="col-md-6 col-lg-6 col-xl-6 summary-item"><span class="summary-item">{{invoiceIncomeByWFStateDataItem.type}}</span></div>
+                            <div class="col-md-6 col-lg-6 col-xl-6 summary-item"><span class="summary-item">{{invoiceIncomeByWFStateDataItem.value}}</span></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                      <stat-chart *ngIf="sumsByWFStateLoaded" title="Dle stavu" chartWidth="200" chartHeight="100" [data]="invoiceIncomeByWFStateData" style="margin-top: -50px;"></stat-chart>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item kt-slider__body" style="height: 250px;">
+              <div class="kt-widget-13">
+                <div class="kt-widget-13__body">
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                      <div class="kt-widget-19__title">
+                        <div class="kt-widget-19__label" style="font-size: 1.5rem;">
+                          <div class="row" style="margin-bottom: 15px;">
+                            <div class="col-md-12 col-lg-12 col-xl-12"><span>Poměr počtu faktur dle dodavatele</span></div>
+                          </div>
+                          <div class="row" *ngFor="let invoiceIncomeBySupplierDataItem of invoiceIncomeBySupplierData">
+                            <div class="col-md-6 col-lg-6 col-xl-6 summary-item"><span class="summary-item">{{invoiceIncomeBySupplierDataItem.type}}</span></div>
+                            <div class="col-md-6 col-lg-6 col-xl-6 summary-item"><span class="summary-item">{{invoiceIncomeBySupplierDataItem.value}}</span></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                      <stat-chart *ngIf="sumsBySupplierLoaded" title="Dle dodavatele" chartWidth="400" chartHeight="200" [data]="invoiceIncomeBySupplierData" style="margin-top: -50px;"></stat-chart>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item kt-slider__body" style="height: 250px;">
+              <div class="kt-widget-13">
+                <div class="kt-widget-13__body">
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                      <div class="kt-widget-19__title">
+                        <div class="kt-widget-19__label" style="font-size: 1.5rem;">
+                          <div class="row" style="margin-bottom: 15px;">
+                            <div class="col-md-12 col-lg-12 col-xl-12"><span>Poměr počtu faktur dle měny</span></div>
+                          </div>
+                          <div class="row" *ngFor="let currencyItem of dashboardData.dashboardInvoice.currency">
+                            <div class="col-md-3 col-lg-2 col-xl-2 summary-item"><span class="summary-item">{{currencyItem.name}}</span></div>
+                            <div class="col-md-3 col-lg-2 col-xl-2 summary-item"><span class="summary-item">{{currencyItem.count}}</span></div>
+                            <div class="col-md-4 col-lg-4 col-xl-4 summary-item"><span class="summary-item"> ({{currencyItem.totalAmount}} {{currencyItem.name}})</span></div>
+                            <div class="col-md-2 col-lg-4 col-xl-4 summary-item"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                      <stat-chart *ngIf="sumsByCurrencyLoaded" title="Dle měny" chartWidth="400" chartHeight="200" [data]="invoiceIncomeByCurrencyData" style="margin-top: -50px;"></stat-chart>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--end::Portlet-->
+  </div>
+  <div class="col-lg-6 col-xl-6 order-lg-5 order-xl-5">
+
+    <!--begin::Portlet-->
+    <div class="kt-portlet kt-portlet--height-fluid kt-widget-13">
+      <div class="kt-portlet__body">
+        <div id="kt-widget-slider-contracts" class="kt-slider carousel slide" data-ride="carousel" data-interval="4000">
+          <div class="kt-slider__head">
+            <div class="kt-slider__label">Smlouvy</div>
+            <div class="kt-slider__nav">
+              <a class="kt-slider__nav-prev carousel-control-prev" href="#kt-widget-slider-contracts" role="button" data-slide="prev">
+                <i class="fa fa-angle-left"></i>
+              </a>
+              <a class="kt-slider__nav-next carousel-control-next" href="#kt-widget-slider-contracts" role="button" data-slide="next">
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </div>
+          </div>
+          <div class="carousel-inner" (click)="redirect('/contracts')">
+            <div class="carousel-item active kt-slider__body" style="height: 250px;">
+              <div class="kt-widget-13">
+                <div class="kt-widget-13__body">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="kt-widget-19__label" style="font-size: 1.5rem;">Máte celkem {{dashboardData.dashboardContract.count}} smluv</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item kt-slider__body" style="height: 250px;">
+              <div class="kt-widget-13">
+                <div class="kt-widget-13__body">
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                      <div class="kt-widget-19__title">
+                        <div class="kt-widget-19__label" style="font-size: 1.5rem;">
+                          <div class="row" style="margin-bottom: 15px;">
+                            <div class="col-md-12 col-lg-12 col-xl-12"><span>Poměr počtu smluv dle jejich typu</span></div>
+                          </div>
+                          <div class="row" *ngFor="let contractByContractTypeDataItem of contractByContractTypeData">
+                            <div class="col-md-6 col-lg-6 col-xl-6 summary-item"><span class="summary-item">{{contractByContractTypeDataItem.type}}</span></div>
+                            <div class="col-md-6 col-lg-6 col-xl-6 summary-item"><span class="summary-item">{{contractByContractTypeDataItem.value}}</span></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                      <stat-chart *ngIf="sumsContractByContractTypeLoaded" title="Dle typu" chartWidth="200" chartHeight="100" [data]="contractByContractTypeData" style="margin-top: -50px;"></stat-chart>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item kt-slider__body" style="height: 250px;">
+              <div class="kt-widget-13">
+                <div class="kt-widget-13__body">
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                      <div class="kt-widget-19__title">
+                        <div class="kt-widget-19__label" style="font-size: 1.5rem;">
+                          <div class="row" style="margin-bottom: 15px;">
+                            <div class="col-md-12 col-lg-12 col-xl-12"><span>Poměr počtu faktur dle jejich druhu</span></div>
+                          </div>
+                          <div class="row" *ngFor="let contractByRecordTypeDataItem of contractByRecordTypeData">
+                            <div class="col-md-6 col-lg-6 col-xl-6 summary-item"><span class="summary-item">{{contractByRecordTypeDataItem.type}}</span></div>
+                            <div class="col-md-6 col-lg-6 col-xl-6 summary-item"><span class="summary-item">{{contractByRecordTypeDataItem.value}}</span></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                      <stat-chart *ngIf="sumsContractByRecordTypeLoaded" title="Dle druhu" chartWidth="400" chartHeight="200" [data]="contractByRecordTypeData" style="margin-top: -50px;"></stat-chart>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--end::Portlet-->
+  </div>
+  <div class="col-lg-6 col-xl-6 order-lg-6 order-xl-6">
+
+    <!--begin::Portlet-->
+    <div class="kt-portlet kt-portlet--height-fluid kt-widget-13">
+      <div class="kt-portlet__body">
+        <div id="kt-widget-slider-managed" class="kt-slider carousel slide" data-ride="carousel" data-interval="4000">
+          <div class="kt-slider__head">
+            <div class="kt-slider__label">Řízené dokumenty</div>
+            <div class="kt-slider__nav">
+              <a class="kt-slider__nav-prev carousel-control-prev" href="#kt-widget-slider-managed" role="button" data-slide="prev">
+                <i class="fa fa-angle-left"></i>
+              </a>
+              <a class="kt-slider__nav-next carousel-control-next" href="#kt-widget-slider-managed" role="button" data-slide="next">
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </div>
+          </div>
+          <div class="carousel-inner" (click)="redirect('/managedDocuments')">
+            <div class="carousel-item active kt-slider__body">
+              <div class="kt-widget-13">
+                <div class="kt-widget-13__body">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="kt-widget-19__label" style="font-size: 1.5rem;">Máte celkem 0 řízených dokumentů</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="kt-widget-13__foot">
+                  <div class="kt-widget-13__progress">
+                    <div class="kt-widget-13__progress-info">
+                      <div class="kt-widget-13__progress-status">
+                        Progress
+                      </div>
+                      <div class="kt-widget-13__progress-value">78%</div>
+                    </div>
+                    <div class="progress">
+                      <div class="progress-bar kt-bg-brand" role="progressbar" style="width: 78%" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item kt-slider__body">
+              <div class="kt-widget-13">
+                <div class="kt-widget-13__body">
+                  <a class="kt-widget-13__title">First Milestone Achivement</a>
+                  <div class="kt-widget-13__desc">
+                    To start a blog, think of a topic about and first brainstorm party is ways to write details
+                  </div>
+                </div>
+                <div class="kt-widget-13__foot">
+                  <div class="kt-widget-13__progress">
+                    <div class="kt-widget-13__progress-info">
+                      <div class="kt-widget-13__progress-status">
+                        Progress
+                      </div>
+                      <div class="kt-widget-13__progress-value">55%</div>
+                    </div>
+                    <div class="progress">
+                      <div class="progress-bar kt-bg-brand" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item kt-slider__body">
+              <div class="kt-widget-13">
+                <div class="kt-widget-13__body">
+                  <a class="kt-widget-13__title">Reached 50,000 sales</a>
+                  <div class="kt-widget-13__desc">
+                    To start a blog, think of a topic about and first brainstorm party is ways to write details
+                  </div>
+                </div>
+                <div class="kt-widget-13__foot">
+                  <div class="kt-widget-13__progress">
+                    <div class="kt-widget-13__progress-info">
+                      <div class="kt-widget-13__progress-status">
+                        Progress
+                      </div>
+                      <div class="kt-widget-13__progress-value">24%</div>
+                    </div>
+                    <div class="progress">
+                      <div class="progress-bar kt-bg-brand" role="progressbar" style="width: 24%" aria-valuenow="24" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--end::Portlet-->
+  </div>
+  <div class="col-lg-6 col-xl-6 order-lg-7 order-xl-7">
+
+    <!--begin::Portlet-->
+    <div class="kt-portlet kt-portlet--height-fluid kt-widget-13">
+      <div class="kt-portlet__body">
+        <div id="kt-widget-slider-databox" class="kt-slider carousel slide" data-ride="carousel" data-interval="4000">
+          <div class="kt-slider__head">
+            <div class="kt-slider__label">Datová schránka</div>
+            <div class="kt-slider__nav">
+              <a class="kt-slider__nav-prev carousel-control-prev" href="#kt-widget-slider-databox" role="button" data-slide="prev">
+                <i class="fa fa-angle-left"></i>
+              </a>
+              <a class="kt-slider__nav-next carousel-control-next" href="#kt-widget-slider-databox" role="button" data-slide="next">
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </div>
+          </div>
+          <div class="carousel-inner" (click)="redirect('/dataBoxDocuments')">
+            <div class="carousel-item active kt-slider__body">
+              <div class="kt-widget-13">
+                <div class="kt-widget-13__body">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="kt-widget-19__label" style="font-size: 1.5rem;">Máte celkem 0 dokumentů z datové schránky</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="kt-widget-13__foot">
+                  <div class="kt-widget-13__progress">
+                    <div class="kt-widget-13__progress-info">
+                      <div class="kt-widget-13__progress-status">
+                        Progress
+                      </div>
+                      <div class="kt-widget-13__progress-value">78%</div>
+                    </div>
+                    <div class="progress">
+                      <div class="progress-bar kt-bg-brand" role="progressbar" style="width: 78%" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item kt-slider__body">
+              <div class="kt-widget-13">
+                <div class="kt-widget-13__body">
+                  <a class="kt-widget-13__title">First Milestone Achivement</a>
+                  <div class="kt-widget-13__desc">
+                    To start a blog, think of a topic about and first brainstorm party is ways to write details
+                  </div>
+                </div>
+                <div class="kt-widget-13__foot">
+                  <div class="kt-widget-13__progress">
+                    <div class="kt-widget-13__progress-info">
+                      <div class="kt-widget-13__progress-status">
+                        Progress
+                      </div>
+                      <div class="kt-widget-13__progress-value">55%</div>
+                    </div>
+                    <div class="progress">
+                      <div class="progress-bar kt-bg-brand" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item kt-slider__body">
+              <div class="kt-widget-13">
+                <div class="kt-widget-13__body">
+                  <a class="kt-widget-13__title">Reached 50,000 sales</a>
+                  <div class="kt-widget-13__desc">
+                    To start a blog, think of a topic about and first brainstorm party is ways to write details
+                  </div>
+                </div>
+                <div class="kt-widget-13__foot">
+                  <div class="kt-widget-13__progress">
+                    <div class="kt-widget-13__progress-info">
+                      <div class="kt-widget-13__progress-status">
+                        Progress
+                      </div>
+                      <div class="kt-widget-13__progress-value">24%</div>
+                    </div>
+                    <div class="progress">
+                      <div class="progress-bar kt-bg-brand" role="progressbar" style="width: 24%" aria-valuenow="24" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--end::Portlet-->
+  </div>
+  <div class="col-lg-6 col-xl-6 order-lg-8 order-xl-8">
+
+    <!--begin::Portlet-->
+    <div class="kt-portlet kt-portlet--height-fluid kt-widget-13">
+      <div class="kt-portlet__head kt-portlet__head--noborder">
+        <div class="kt-portlet__head-label">
+          <h3 class="kt-portlet__head-title">Číselníky</h3>
+        </div>
+        <div class="kt-portlet__head-toolbar">
+          <div class="kt-portlet__head-toolbar-wrapper">
+          </div>
+        </div>
+      </div>
+      <div class="kt-portlet__body kt-portlet__body--fit kt-portlet__body--fluid">
+        <div class="kt-widget-7">
+          <div class="kt-widget-7__items row">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 register-item">
+              <a href="#" [routerLink]="['/register/subjects']" class="badge badge-info">Subjekty</a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 register-item">
+              <a href="#" [routerLink]="['/register/contractTypes']" class="badge badge-info">Typy smluv</a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 register-item">
+              <a href="#" [routerLink]="['/register/contractValidityTypes']" class="badge badge-info">Typy platnosti smluv</a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 register-item">
+              <a href="#" [routerLink]="['/register/costCenters']" class="badge badge-info">Nákladová střediska</a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 register-item">
+              <a href="#" [routerLink]="['/register/currencies']" class="badge badge-info">Měny</a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 register-item">
+              <a href="#" [routerLink]="['/register/invoiceTypes']" class="badge badge-info">Typy faktur</a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 register-item">
+              <a href="#" [routerLink]="['/register/orgUnits']" class="badge badge-info">Organizační jednotky</a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 register-item">
+              <a href="#" [routerLink]="['/register/paymentTypes']" class="badge badge-info">Typy plateb</a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 register-item">
+              <a href="#" [routerLink]="['/register/sendingTypes']" class="badge badge-info">Způsoby odeslání</a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 register-item">
+              <a href="#" [routerLink]="['/register/formats']" class="badge badge-info">Formáty</a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 register-item">
+              <a href="#" [routerLink]="['/register/integSystems']" class="badge badge-info">Integrační systémy</a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 register-item register-item">
+              <a href="#" [routerLink]="['/register/languages']" class="badge badge-info">Jazyky</a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 register-item register-item">
+              <a href="#" [routerLink]="['/register/storageSystems']" class="badge badge-info">Úložné systémy</a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 register-item register-item">
+              <a href="#" [routerLink]="['/register/kindTypes']" class="badge badge-info">Druhy dokumentů</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--end::Portlet-->
+  </div>
+
+</div>
+
+<!--end::Row-->
+<!--
+<div *ngIf="authenticationService.userIsLogged" class="dashboard-main-div">
+
+    <div class="row">
+
+        <div class="col-4" style="padding: 5px; display: block;">
+            <div class="agenda-bubble card">
+                <div class="card-body">
+                    <div class="agenda-bubble-title">
+                        <i class="fa fa-tasks head-icon"></i>
+                        <h5 class="card-title">{{Res.dashboard.taskTitle}}</h5>
+                    </div>
+                    <p class="card-text agenda-bubble-description">{{Res.dashboard.taskDescription}}</p>
+                    <table>
+                        <tr class="agenda-bubble-tr">
+                            <td class="agenda-bubble-td-title"><span class="agenda-bubble-text">Máte celkem</span></td>
+                            <td class="agenda-bubble-td-value"><a [routerLink]="['/tasks']" class="btn btn-primary bubble-tiny">{{taskNewCount}} úkolů</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4" style="padding: 5px; display: block;">
+            <div class="agenda-bubble card">
+                <div class="card-body">
+                    <div class="agenda-bubble-title">
+                        <i class="fa fa-bar-chart head-icon"></i>
+                        <h5 class="card-title">{{Res.dashboard.reportTitle}}</h5>
+                    </div>
+                    <p class="card-text agenda-bubble-description">{{Res.dashboard.reportDescription}}</p>
+                    <table>
+                        <tr class="agenda-bubble-tr">
+                            <td class="agenda-bubble-td-title"><span class="agenda-bubble-text">Můžete vytvořit</span></td>
+                            <td class="agenda-bubble-td-value"><a [routerLink]="['/report1']" class="btn btn-primary bubble-tiny">Sumární přehled</a></td>
+                        </tr>
+                        <tr class="agenda-bubble-tr">
+                            <td class="agenda-bubble-td-title"><span class="agenda-bubble-text"></span></td>
+                            <td class="agenda-bubble-td-value"><a [routerLink]="['/report2']" class="btn btn-primary bubble-tiny">Výpis uložených dokumentů</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4" style="padding: 5px; display: block;">
+            <div class="agenda-bubble card">
+                <div class="card-body">
+                    <div class="agenda-bubble-title">
+                        <i class="fa fa-trash head-icon"></i>
+                        <h5 class="card-title">Skartace</h5>
+                    </div>
+                    <p class="card-text agenda-bubble-description">Kliknutím zobrazíte vaše skartace.</p>
+                    <table>
+                        <tr class="agenda-bubble-tr">
+                            <td class="agenda-bubble-td-title"><span class="agenda-bubble-text">Máte celkem</span></td>
+                            <td class="agenda-bubble-td-value"><a [routerLink]="['/shredding/true']" class="btn btn-primary bubble-tiny">{{shreddingActiveCount}} aktivních</a></td>
+                        </tr>
+                        <tr class="agenda-bubble-tr">
+                            <td class="agenda-bubble-td-title"><span class="agenda-bubble-text"></span></td>
+                            <td class="agenda-bubble-td-value"><a [routerLink]="['/shredding/false']" class="btn btn-primary bubble-tiny">{{shreddingFinishedCount}} dokončených</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+
+        <div class="col-4" style="padding: 5px; display: block;">
+            <div class="agenda-bubble card">
+                <div class="card-body">
+                    <div class="agenda-bubble-title">
+                        <i class="fa fa-file-o head-icon"></i>
+                        <h5 class="card-title">Řízené dokumenty</h5>
+                    </div>
+                    <p class="card-text agenda-bubble-description">Kliknutím zobrazíte vaše řízené dokumenty.</p>
+                    <table>
+                        <tr class="agenda-bubble-tr">
+                            <td class="agenda-bubble-td-title"><span class="agenda-bubble-text">Máte celkem</span></td>
+                            <td class="agenda-bubble-td-value"><a [routerLink]="['/managedDocuments']" [queryParams]="{state: closed}" class="btn btn-primary bubble-tiny">{{managedDocumentCount}} řízených dokumentů</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4" style="padding: 5px; display: block;">
+            <div class="agenda-bubble card">
+                <div class="card-body">
+                    <div class="agenda-bubble-title">
+                        <i class="fa fa-copy head-icon"></i>
+                        <h5 class="card-title">Smlouvy</h5>
+                    </div>
+                    <p class="card-text agenda-bubble-description">Kliknutím zobrazíte vaše smlouvy.</p>
+                    <table>
+                        <tr class="agenda-bubble-tr">
+                            <td class="agenda-bubble-td-title"><span class="agenda-bubble-text">Máte celkem</span></td>
+                            <td class="agenda-bubble-td-value"><a [routerLink]="['/contracts/KS']" class="btn btn-primary bubble-tiny">{{contractKSCount}} kupních smluv</a></td>
+                        </tr>
+                        <tr class="agenda-bubble-tr">
+                            <td class="agenda-bubble-td-title"><span class="agenda-bubble-text"></span></td>
+                            <td class="agenda-bubble-td-value"><a [routerLink]="['/contracts/LS']" class="btn btn-primary bubble-tiny">{{contractLSCount}} leasingových smluv</a></td>
+                        </tr>
+                        <tr class="agenda-bubble-tr">
+                            <td class="agenda-bubble-td-title"><span class="agenda-bubble-text"></span></td>
+                            <td class="agenda-bubble-td-value"><a [routerLink]="['/contracts/SOD']" class="btn btn-primary bubble-tiny">{{contractSODCount}} smluv o dílo</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4" style="padding: 5px; display: block;">
+            <div class="agenda-bubble card">
+                <div class="card-body">
+                    <div class="agenda-bubble-title">
+                        <i class="fa fa-calculator head-icon"></i>
+                        <h5 class="card-title">Faktury</h5>
+                    </div>
+                    <p class="card-text agenda-bubble-description">Kliknutím zobrazíte vaše faktury.</p>
+                    <table>
+                        <tr class="agenda-bubble-tr">
+                            <td class="agenda-bubble-td-title"><span class="agenda-bubble-text">Máte celkem</span></td>
+                            <td class="agenda-bubble-td-value"><a [routerLink]="['/invoiceIncome']" class="btn btn-primary bubble-tiny">{{invoiceIncomeCount}} přijatých</a></td>
+                        </tr>
+                        <tr class="agenda-bubble-tr">
+                            <td class="agenda-bubble-td-title"><span class="agenda-bubble-text"></span></td>
+                            <td class="agenda-bubble-td-value"><a [routerLink]="['/invoiceIssued']" class="btn btn-primary bubble-tiny">{{invoiceIssuedCount}} vydaných</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+
+        <div class="col-4" style="padding: 5px; display: block;">
+            <div class="agenda-bubble card">
+                <div class="card-body">
+                    <div class="agenda-bubble-title">
+                        <i class="fa fa-gavel head-icon"></i>
+                        <h5 class="card-title">Důvěryhodný archiv</h5>
+                    </div>
+                    <p class="card-text agenda-bubble-description">Kliknutím zobrazíte dokumentu evidované v důvěryhodném archivu.</p>
+                    <table>
+                        <tr class="agenda-bubble-tr">
+                            <td class="agenda-bubble-td-title"><span class="agenda-bubble-text">Máte celkem</span></td>
+                            <td class="agenda-bubble-td-value"><a [routerLink]="['/trustedArchive']" class="btn btn-primary bubble-tiny">{{taDocumentCount}} dokumentů v důvěryhodném archivu</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4" style="padding: 5px; display: block;">
+            <div class="agenda-bubble card">
+                <div class="card-body">
+                    <div class="agenda-bubble-title">
+                        <i class="fa fa-list head-icon"></i>
+                        <h5 class="card-title">Číselníky</h5>
+                    </div>
+                    <p class="card-text agenda-bubble-description">Kliknutím zobrazíte systémové číselníky.</p>
+                    <div class="row" style="margin: 0;">
+                        <div class="col-4 bubble-div"><a [routerLink]="['/register/subjects']" class="btn btn-primary bubble">Subjekty</a></div>
+                        <div class="col-4 bubble-div"><a [routerLink]="['/register/contractTypes']" class="btn btn-primary bubble">Typy smluv</a></div>
+                        <div class="col-4 bubble-div"><a [routerLink]="['/register/contractValidityTypes']" class="btn btn-primary bubble">Typy platnosti smluv</a></div>
+                    </div>
+                    <div class="row" style="margin: 0;">
+                        <div class="col-4 bubble-div"><a [routerLink]="['/register/costCenters']" class="btn btn-primary bubble">Nákladová střediska</a></div>
+                        <div class="col-4 bubble-div"><a [routerLink]="['/register/currencies']" class="btn btn-primary bubble">Měny</a></div>
+                        <div class="col-4 bubble-div"><a [routerLink]="['/register/invoiceTypes']" class="btn btn-primary bubble">Typy faktur</a></div>
+                    </div>
+                    <div class="row" style="margin: 0;">
+                        <div class="col-4 bubble-div"><a [routerLink]="['/register/orgUnits']" class="btn btn-primary bubble">Organizační jednotky</a></div>
+                        <div class="col-4 bubble-div"><a [routerLink]="['/register/paymentTypes']" class="btn btn-primary bubble">Typy plateb</a></div>
+                        <div class="col-4 bubble-div"><a [routerLink]="['/register/sendingTypes']" class="btn btn-primary bubble">Způsoby odeslání</a></div>
+                    </div>
+                    <div class="row" style="margin: 0;">
+                        <div class="col-4 bubble-div"><a [routerLink]="['/register/formats']" class="btn btn-primary bubble">Formáty</a></div>
+                        <div class="col-4 bubble-div"><a [routerLink]="['/register/integSystems']" class="btn btn-primary bubble">Integrační systémy</a></div>
+                        <div class="col-4 bubble-div"><a [routerLink]="['/register/languages']" class="btn btn-primary bubble">Jazyky</a></div>
+                    </div>
+                    <div class="row" style="margin: 0;">
+                        <div class="col-4 bubble-div"><a [routerLink]="['/register/storageSystems']" class="btn btn-primary bubble">Úložné systémy</a></div>
+                        <div class="col-4 bubble-div"></div>
+                        <div class="col-4 bubble-div"><a [routerLink]="['/register/kindTypes']" class="btn btn-primary bubble">Druhy dokumentů</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4" style="padding: 5px; display: block;">
+            <div class="agenda-bubble card">
+                <div class="card-body">
+                    <div class="agenda-bubble-title">
+                        <i class="fa fa-envelope-o head-icon"></i>
+                        <h5 class="card-title">Dokumenty z datové schránky</h5>
+                    </div>
+                    <p class="card-text agenda-bubble-description">Kliknutím zobrazíte vaše dokumenty z datové schránky.</p>
+                    <table>
+                        <tr class="agenda-bubble-tr">
+                            <td class="agenda-bubble-td-title"><span class="agenda-bubble-text">Máte celkem</span></td>
+                            <td class="agenda-bubble-td-value"><a [routerLink]="['/dataBoxDocuments']" [queryParams]="{state: closed}" class="btn btn-primary bubble-tiny">{{dataBoxDocumentCount}} dokumentů z datové schránky</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+-->

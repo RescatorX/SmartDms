@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
     <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
     <IsPackable>false</IsPackable>
@@ -16,9 +16,9 @@
     <PackageReference Include="GraphQL" Version="2.4.0" />
     <PackageReference Include="GraphQL.Server.Transports.AspNetCore" Version="3.4.0" />
     <PackageReference Include="GraphQL.Server.Ui.Playground" Version="3.4.0" />
-    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="3.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="3.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.1" />
@@ -35,7 +35,10 @@
     <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
     <PackageReference Include="Serilog.Sinks.File" Version="4.1.0" />
     <PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.0" />
+    <PackageReference Include="WorkflowCore" Version="3.1.5" />
+    <PackageReference Include="WorkflowCore.Testing" Version="2.3.0" />
     <PackageReference Include="WorkflowCore.Users" Version="2.1.0" />
+    <PackageReference Include="WorkflowCore.WebAPI" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,11 +49,63 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\app-routing.module.ts" />
+    <None Remove="ClientApp\src\app\components\dashboard\dashboard.component.ts" />
+    <None Remove="ClientApp\src\app\components\dashboard\index.ts" />
+    <None Remove="ClientApp\src\app\components\document\contract\detail\contract-detail.component.ts" />
+    <None Remove="ClientApp\src\app\components\document\contract\detail\index.ts" />
+    <None Remove="ClientApp\src\app\components\document\contract\grid\contract-grid.component.ts" />
+    <None Remove="ClientApp\src\app\components\document\contract\grid\index.ts" />
+    <None Remove="ClientApp\src\app\components\document\contract\index.ts" />
+    <None Remove="ClientApp\src\app\components\document\databox\index.ts" />
+    <None Remove="ClientApp\src\app\components\document\index.ts" />
+    <None Remove="ClientApp\src\app\components\document\invoice\income\index.ts" />
+    <None Remove="ClientApp\src\app\components\document\invoice\index.ts" />
+    <None Remove="ClientApp\src\app\components\document\invoice\issued\index.ts" />
+    <None Remove="ClientApp\src\app\components\document\managed\index.ts" />
     <None Remove="ClientApp\src\app\components\index.ts" />
     <None Remove="ClientApp\src\app\components\shared\index.ts" />
     <None Remove="ClientApp\src\app\components\shared\notification-alert\index.ts" />
     <None Remove="ClientApp\src\app\components\shared\notification-alert\notification-alert.component.ts" />
+    <None Remove="ClientApp\src\app\components\shared\stat-chart\index.ts" />
+    <None Remove="ClientApp\src\app\components\shared\stat-chart\stat-chart.component.ts" />
+    <None Remove="ClientApp\src\app\components\users\index.ts" />
+    <None Remove="ClientApp\src\app\components\users\user-login\index.ts" />
+    <None Remove="ClientApp\src\app\components\users\user-login\user-login.component.ts" />
+    <None Remove="ClientApp\src\app\entities\audit-trail.entity.ts" />
+    <None Remove="ClientApp\src\app\entities\dashboard.entity.ts" />
+    <None Remove="ClientApp\src\app\entities\document-contract.entity.ts" />
+    <None Remove="ClientApp\src\app\entities\document-databox.entity.ts" />
+    <None Remove="ClientApp\src\app\entities\document-invoice-income.entity.ts" />
+    <None Remove="ClientApp\src\app\entities\document-invoice-issued.entity.ts" />
+    <None Remove="ClientApp\src\app\entities\document-managed.entity.ts" />
+    <None Remove="ClientApp\src\app\entities\document.entity.ts" />
+    <None Remove="ClientApp\src\app\entities\export.entity.ts" />
+    <None Remove="ClientApp\src\app\entities\grid-column.ts" />
+    <None Remove="ClientApp\src\app\entities\integration-system.entity.ts" />
+    <None Remove="ClientApp\src\app\entities\query.entity.ts" />
+    <None Remove="ClientApp\src\app\entities\register.entity.ts" />
+    <None Remove="ClientApp\src\app\entities\shredding-form.entity.ts" />
+    <None Remove="ClientApp\src\app\entities\shredding-item.entity.ts" />
+    <None Remove="ClientApp\src\app\entities\shredding.entity.ts" />
+    <None Remove="ClientApp\src\app\entities\stat-chart.entity.ts" />
+    <None Remove="ClientApp\src\app\entities\task.entity.ts" />
+    <None Remove="ClientApp\src\app\entities\trusted-archive.entity.ts" />
+    <None Remove="ClientApp\src\app\entities\version.entity.ts" />
+    <None Remove="ClientApp\src\app\entities\workflow-history.entity.ts" />
+    <None Remove="ClientApp\src\app\entities\workflow-result.entity.ts" />
+    <None Remove="ClientApp\src\app\entities\workflow-start.entity.ts" />
+    <None Remove="ClientApp\src\app\entities\workflow.entity.ts" />
+    <None Remove="ClientApp\src\app\services\auth-guard.service.ts" />
+    <None Remove="ClientApp\src\app\services\authentication.service.ts" />
+    <None Remove="ClientApp\src\app\services\dashboard.service.ts" />
+    <None Remove="ClientApp\src\app\services\document.service.ts" />
     <None Remove="ClientApp\src\app\services\graphql.service.ts" />
+    <None Remove="ClientApp\src\app\services\igrid.service.ts" />
+    <None Remove="ClientApp\src\app\services\register.service.ts" />
+    <None Remove="ClientApp\src\app\services\shredding.service.ts" />
+    <None Remove="ClientApp\src\app\services\task.service.ts" />
+    <None Remove="ClientApp\src\app\services\ui.service.ts" />
     <None Remove="ClientApp\src\app\types\index.ts" />
     <None Remove="ClientApp\src\app\types\user.type.ts" />
   </ItemGroup>
@@ -62,15 +117,72 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ClientApp\src\assets\img\" />
     <Folder Include="Models\" />
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\app-routing.module.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\components\dashboard\dashboard.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\components\dashboard\index.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\components\document\contract\detail\contract-detail.component.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\components\document\contract\detail\index.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\components\document\contract\grid\contract-grid.component.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\components\document\contract\grid\index.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\components\document\contract\index.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\components\document\databox\index.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\components\document\index.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\components\document\invoice\income\index.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\components\document\invoice\index.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\components\document\invoice\issued\index.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\components\document\managed\index.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\components\index.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\components\shared\index.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\components\shared\notification-alert\index.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\components\shared\notification-alert\notification-alert.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\components\shared\stat-chart\index.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\components\shared\stat-chart\stat-chart.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\components\users\index.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\components\users\user-login\index.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\components\users\user-login\user-login.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\entities\audit-trail.entity.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\entities\dashboard.entity.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\entities\document-databox.entity.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\entities\document-contract.entity.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\entities\document-invoice-income.entity.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\entities\document-invoice-issued.entity.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\entities\document-managed.entity.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\entities\document.entity.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\entities\export.entity.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\entities\grid-column.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\entities\integration-system.entity.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\entities\query.entity.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\entities\register.entity.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\entities\shredding-form.entity.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\entities\shredding-item.entity.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\entities\shredding.entity.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\entities\stat-chart.entity.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\entities\task.entity.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\entities\trusted-archive.entity.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\entities\version.entity.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\entities\workflow-history.entity.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\entities\workflow-result.entity.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\entities\workflow-start.entity.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\entities\workflow.entity.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\auth-guard.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\authentication.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\dashboard.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\document.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\graphql.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\igrid.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\register.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\shredding.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\task.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\ui.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\types\index.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\types\user.type.ts" />
   </ItemGroup>

@@ -13,7 +13,7 @@ namespace SmartDmsData.Entities
         [Key]
         [DataMember(Name = "id", Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public virtual string Id { get; set; }
+        public virtual Guid Id { get; set; }
 
         public abstract override string ToString();
     }

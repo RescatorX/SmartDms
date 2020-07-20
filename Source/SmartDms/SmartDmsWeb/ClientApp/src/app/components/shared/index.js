@@ -4,4 +4,5 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("./notification-alert"));
+__export(require("./stat-chart"));
 //# sourceMappingURL=index.js.map

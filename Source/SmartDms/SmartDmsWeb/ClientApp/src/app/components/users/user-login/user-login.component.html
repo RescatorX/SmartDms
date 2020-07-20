@@ -1,0 +1,29 @@
+<ng-template #template>
+  <div class="modal-header">
+    <span *ngIf="!isChangePassword">{{Res.userLogin.loginTitle}}</span>
+    <span *ngIf="isChangePassword">{{user.firstname}} {{user.surname}} - {{Res.userLogin.changePasswordTitle}}</span>
+  </div>
+  <div class="modal-body">
+
+    <span>{{Res.userLogin.username}}</span>
+    <input *ngIf="!isChangePassword" type="text" [(ngModel)]="username">
+
+    <span>{{Res.userLogin.password}}</span>
+    <input type="password" [(ngModel)]="password">
+
+    <span>{{Res.userLogin.passwordRepeat}}</span>
+    <input *ngIf="isChangePassword" type="password" [(ngModel)]="passwordRepeat">
+
+    <div *ngIf="isChangePassword && passwordRepeatInvalid" class="cross-validation-error-message alert alert-danger">
+      {{Res.userLogin.passwordVerifyError}}
+    </div>
+
+    <span *ngIf="!isChangePassword">{{loginError}}</span>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="modalRef.hide()">Close</button>
+    <button *ngIf="!isChangePassword" role="primary" (click)="login()">{{Res.userLogin.login}}</button>
+    <button *ngIf="isChangePassword" role="secondary" (click)="changePassword()">{{Res.userLogin.changePassword}}</button>
+  </div>
+</ng-template>
