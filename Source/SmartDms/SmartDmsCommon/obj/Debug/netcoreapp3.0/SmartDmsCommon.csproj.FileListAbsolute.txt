@@ -1,7 +1,0 @@
-C:\Work\SmartDms\Source\SmartDms\SmartDmsCommon\bin\Debug\netcoreapp3.0\SmartDmsCommon.deps.json
-C:\Work\SmartDms\Source\SmartDms\SmartDmsCommon\bin\Debug\netcoreapp3.0\SmartDmsCommon.dll
-C:\Work\SmartDms\Source\SmartDms\SmartDmsCommon\bin\Debug\netcoreapp3.0\SmartDmsCommon.pdb
-C:\Work\SmartDms\Source\SmartDms\SmartDmsCommon\obj\Debug\netcoreapp3.0\SmartDmsCommon.AssemblyInfoInputs.cache
-C:\Work\SmartDms\Source\SmartDms\SmartDmsCommon\obj\Debug\netcoreapp3.0\SmartDmsCommon.AssemblyInfo.cs
-C:\Work\SmartDms\Source\SmartDms\SmartDmsCommon\obj\Debug\netcoreapp3.0\SmartDmsCommon.dll
-C:\Work\SmartDms\Source\SmartDms\SmartDmsCommon\obj\Debug\netcoreapp3.0\SmartDmsCommon.pdb
