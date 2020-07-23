@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +11,7 @@ namespace SmartDmsData.Repositories.Interfaces
 {
     public interface IDocumentRepository
     {
-        DbSet<Document> GetQuery();
+        IQueryable<Document> GetQuery();
 
         Document Add(Document document);
 

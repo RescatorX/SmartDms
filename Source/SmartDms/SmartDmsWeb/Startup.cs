@@ -19,6 +19,7 @@ using SmartDmsData.Repositories.Interfaces;
 using SmartDmsServices.Services;
 using SmartDmsServices.Interfaces;
 using SmartDmsWeb.GraphQL.Schemas;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 namespace SmartDmsWeb
 {
@@ -34,6 +35,19 @@ namespace SmartDmsWeb
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+/*
+            // If using Kestrel:
+            services.Configure<KestrelServerOptions>(options =>
+            {
+                options.AllowSynchronousIO = true;
+            });
+*/
+            // If using IIS:
+            services.Configure<IISServerOptions>(options =>
+            {
+                options.AllowSynchronousIO = true;
+            });
+
             services.AddDbContext<SmartDmsDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("SmartDmsData")));
 
             services.AddSingleton<IAuditTrailService, AuditTrailService>();
@@ -41,10 +55,11 @@ namespace SmartDmsWeb
             services.AddSingleton<ISmsSender, SmsSender>();
 
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IDocumentRepository, DocumentRepository>();
             services.AddScoped<IDependencyResolver>(s => new FuncDependencyResolver(s.GetRequiredService));
-            services.AddScoped<UserSchema>();
+            services.AddScoped<RootSchema>();
 
-            services.AddGraphQL(o => { o.ExposeExceptions = false; })
+            services.AddGraphQL(o => { o.ExposeExceptions = true; })
                 .AddGraphTypes(ServiceLifetime.Scoped);
 /*
             services.AddDefaultIdentity<User>(o => {
@@ -108,7 +123,7 @@ namespace SmartDmsWeb
                 endpoints.MapRazorPages();
             });
 
-            app.UseGraphQL<UserSchema>();
+            app.UseGraphQL<RootSchema>();
             app.UseGraphQLPlayground(options: new GraphQLPlaygroundOptions());
 
             app.UseSpa(spa =>

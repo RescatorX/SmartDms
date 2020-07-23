@@ -14,7 +14,6 @@ export class AppComponent {
   }
 
   ngOnInit(): void {
-    //this.graphQlService.getUsers();
 
     if (!this.authorizeService.isAuthenticated()) {
 
@@ -22,7 +21,5 @@ export class AppComponent {
         console.log(result.status.toString());
       });
     }
-
-    //this.graphQlService.getUserByUserName("RescatorX");
   }
 }

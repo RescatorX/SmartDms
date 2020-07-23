@@ -25,8 +25,8 @@ namespace SmartDmsData
 
         public DbSet<AuditTrail> AuditTrails { get; set; }
         public DbSet<Document> Documents { get; set; }
-        public DbSet<PersistedGrant> PersistedGrants { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public DbSet<DeviceFlowCodes> DeviceFlowCodes { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public DbSet<PersistedGrant> PersistedGrants { get; set; }
+        public DbSet<DeviceFlowCodes> DeviceFlowCodes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

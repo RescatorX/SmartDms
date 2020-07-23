@@ -44,6 +44,7 @@ namespace SmartDmsWeb
                     config.AddDebug();
                 })
                 .UseStartup<Startup>()
+                //.UseUrls("http://*:80") // <-----
                 .Build();
     }
 }

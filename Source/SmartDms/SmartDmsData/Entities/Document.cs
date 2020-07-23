@@ -30,7 +30,7 @@ namespace SmartDmsData.Entities
         public string TAState { get; set; }
         public IEnumerable<Workflow> Workflows { get; set; }
         public Document ParentDocument { get; set; }
-        public IEnumerable<Document> documents { get; set; }
+        public IEnumerable<Document> Documents { get; set; }
         public DateTime Created { get; set; }
         public User CreatedBy { get; set; }
         public DateTime Modified { get; set; }

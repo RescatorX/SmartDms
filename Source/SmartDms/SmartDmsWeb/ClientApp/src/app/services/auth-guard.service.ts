@@ -12,6 +12,8 @@ export class AuthGuardService implements CanActivate {
 
   canActivate(): boolean {
 
+    return true;
+/*
     if (!this.authenticationService.userIsLogged || (this.userService.user == null)) {
 
       this.authenticationService.userIsLogged = false;
@@ -46,5 +48,6 @@ export class AuthGuardService implements CanActivate {
       });
     }
     return true;
+*/
   }
 }

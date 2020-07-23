@@ -19,6 +19,7 @@ import { AuthorizeInterceptor } from 'src/api-authorization/authorize.intercepto
 
 import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
+import { ContractGridComponent } from './components/document/contract';
 import { AuthGuardService, UserService, LogService, AuthenticationService, ConfigService, DashboardService, DocumentService, GraphqlService, NotificationService, RegisterService, ShreddingService, TaskService, UiService } from './services';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 
@@ -29,7 +30,8 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
     HomeComponent,
     DashboardComponent,
     StatChartComponent, 
-    UserLoginComponent
+    UserLoginComponent,
+    ContractGridComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

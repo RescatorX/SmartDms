@@ -8,6 +8,5 @@ __export(require("./customValidators"));
 __export(require("./data-types"));
 __export(require("./global.const"));
 __export(require("./guid"));
-__export(require("./km-form"));
 __export(require("./utils"));
 //# sourceMappingURL=index.js.map

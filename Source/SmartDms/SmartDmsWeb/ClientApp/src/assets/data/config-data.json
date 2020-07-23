@@ -1,2 +1,26 @@
 [
+  {
+    "code": "kmweb.requestTimeout",
+    "value": 29000
+  },
+  {
+    "code": "kmweb.dataTable.pageSize",
+    "value": 30
+  },
+  {
+    "code": "kmweb.dataTable.queryLimit",
+    "value": 30
+  },
+  {
+    "code": "kmweb.dataTable.fulltextQueryLimit",
+    "value": 100
+  },
+  {
+    "code": "kmweb.test1",
+    "value": "aaa"
+  },
+  {
+    "code": "kmweb.notificationCheckInterval",
+    "value": 10000
+  }
 ]

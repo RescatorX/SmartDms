@@ -4,6 +4,7 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("./dashboard"));
+__export(require("./document"));
 __export(require("./shared"));
 __export(require("./users"));
 //# sourceMappingURL=index.js.map
