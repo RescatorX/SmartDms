@@ -13,7 +13,8 @@ namespace SmartDmsData.Entities
         public string Name { get; set; }
         public string OriginalName { get; set; }
         public string Barcode { get; set; }
-        public DocumentType DocumentType { get; set; }
+        public DocumentTypeRegister DocumentTypeRegister { get; set; }
+        public String DocumentType { get; set; }
         public DateTime? AcquisitionDate { get; set; }
         public string Acquirer { get; set; }
         public string AcquisitionSystem { get; set; }

@@ -8,10 +8,9 @@ namespace SmartDmsData.Entities.Registers
     {
         public override string ToString()
         {
-            return "KindTypeRegister: [ Id=" + this.Id
-                + ", Active=" + this.Active
-                + ", Code=" + this.Code
+            return "KindTypeRegister: [ Code=" + this.Code
                 + ", Name=" + this.Name
+                + ", Active=" + this.Active
                 + ", Note=" + this.Note
                 + " ]";
         }

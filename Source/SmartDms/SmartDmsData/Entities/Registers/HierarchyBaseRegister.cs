@@ -14,10 +14,9 @@ namespace SmartDmsData.Entities.Registers
         
         public override string ToString()
         {
-            return "HierarchyBaseRegister: [ Id=" + this.Id
-                + ", Active=" + this.Active
-                + ", Code=" + this.Code
+            return "HierarchyBaseRegister: [ Code=" + this.Code
                 + ", Name=" + this.Name
+                + ", Active=" + this.Active
                 + ", Note=" + this.Note
                 + ", ParentRegister=" + ((this.ParentRegister != null) ? this.ParentRegister.ToString() : "NULL")
                 + ", ChildRegisters=" + ((this.ChildRegisters != null) ? this.ChildRegisters.ToString() : "NULL")

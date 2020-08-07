@@ -13,10 +13,9 @@ namespace SmartDmsData.Entities.Registers
 
         public override string ToString()
         {
-            return "CostCenterRegister: [ Id=" + this.Id
-                + ", Active=" + this.Active
-                + ", Code=" + this.Code
+            return "CostCenterRegister: [ Code=" + this.Code
                 + ", Name=" + this.Name
+                + ", Active=" + this.Active
                 + ", Note=" + this.Note
                 + ", Group=" + this.Group
                 + " ]";

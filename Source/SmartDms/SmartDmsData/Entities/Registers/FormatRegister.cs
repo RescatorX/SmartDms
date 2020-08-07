@@ -11,10 +11,9 @@ namespace SmartDmsData.Entities.Registers
 
         public override string ToString()
         {
-            return "FormatRegister: [ Id=" + this.Id
-                + ", Active=" + this.Active
-                + ", Code=" + this.Code
+            return "FormatRegister: [ Code=" + this.Code
                 + ", Name=" + this.Name
+                + ", Active=" + this.Active
                 + ", Note=" + this.Note
                 + ", MimeType=" + this.MimeType
                 + ", DosExtension=" + this.DosExtension

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { DocumentService, UiService } from '../../../../services';
+import { DocumentService, UiService, FilterItem } from '../../../../services';
 import { LogEntity, DocumentContractEntity } from '../../../../entities';
 
 @Component({
@@ -24,12 +24,15 @@ export class ContractGridComponent implements OnInit {
 
   ngOnInit() {
 
-    this.documentService.getContracts(LogEntity.CreateAction(this, "ContractGridComponent.ngOnInit")).subscribe(({ data, loading }) => {
+    let filter: FilterItem[] = [ { "barcode": "BC111"} ];
+
+    //this.documentService.getContracts(LogEntity.CreateAction(this, "ContractGridComponent.ngOnInit.getContracts")).subscribe(({ data, loading }) => {
+    this.documentService.getFilteredContracts(LogEntity.CreateAction(this, "ContractGridComponent.ngOnInit.getFilteredContracts"), filter).subscribe(({ data, loading }) => {
 
       this.isLoading = loading;
       this.contracts = data;
     }, error => {
-        console.log("Error reading contracts: " + JSON.stringify(error));
+        console.log("Error reading filtered contracts: " + JSON.stringify(error));
     }, () => {
         this.isLoading = false;
     });

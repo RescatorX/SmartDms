@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
 using SmartDmsData.Entities;
+using SmartDmsData.Entities.Registers;
 using SmartDmsData.Enums;
 using SmartDmsData.Repositories.Interfaces;
 
@@ -22,10 +23,10 @@ namespace SmartDmsData.Repositories
         public IQueryable<Document> GetQuery()
         {
             List<Document> documents = new List<Document>();
-            documents.Add(new Document() { Id = Guid.NewGuid(), Name = "Doc_01", OriginalName = "Doc_01.df", Barcode = "BC111", DocumentType = DocumentType.Contract });
-            documents.Add(new Document() { Id = Guid.NewGuid(), Name = "Doc_02", OriginalName = "Doc_02.df", Barcode = "BC222", DocumentType = DocumentType.Invoice });
-            documents.Add(new Document() { Id = Guid.NewGuid(), Name = "Doc_03", OriginalName = "Doc_03.df", Barcode = "BC333", DocumentType = DocumentType.Managed });
-            documents.Add(new Document() { Id = Guid.NewGuid(), Name = "Doc_04", OriginalName = "Doc_04.df", Barcode = "BC444", DocumentType = DocumentType.Document });
+            documents.Add(new Document() { Id = Guid.NewGuid(), Name = "Doc_01", OriginalName = "Doc_01.df", Barcode = "BC111", DocumentType = "Contract" });
+            documents.Add(new Document() { Id = Guid.NewGuid(), Name = "Doc_02", OriginalName = "Doc_02.df", Barcode = "BC222", DocumentType = "Invoice" });
+            documents.Add(new Document() { Id = Guid.NewGuid(), Name = "Doc_03", OriginalName = "Doc_03.df", Barcode = "BC333", DocumentType = "Managed" });
+            documents.Add(new Document() { Id = Guid.NewGuid(), Name = "Doc_04", OriginalName = "Doc_04.df", Barcode = "BC444", DocumentType = "Document" });
 
             return documents.AsQueryable();
 

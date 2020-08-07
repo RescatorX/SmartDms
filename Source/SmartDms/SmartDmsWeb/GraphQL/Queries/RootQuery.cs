@@ -24,13 +24,17 @@ namespace SmartDmsWeb.GraphQL.Queries
                     {
                         Name = "id"
                     },
-                    new QueryArgument<DocumentTypeType>
+                    new QueryArgument<StringGraphType>
                     {
                         Name = "documentType"
                     },
                     new QueryArgument<StringGraphType>
                     {
                         Name = "barcode"
+                    },
+                    new QueryArgument<ContractFilterType>
+                    {
+                        Name = "filter"
                     }
                 }),
                 resolve: context =>
@@ -48,17 +52,19 @@ namespace SmartDmsWeb.GraphQL.Queries
                     String documentType = context.GetArgument<String>("documentType");
                     if (!string.IsNullOrEmpty(documentType))
                     {
-                        if (!Enum.TryParse(documentType, out SmartDmsData.Enums.DocumentType docType))
-                        {
-                            throw new Exception("Unknown document type '" + documentType + "'");
-                        }
-                        return documentRepository.GetQuery().Include(d => d.Documents).Include(d => d.ParentDocument).Include(d => d.Workflows).Where(d => d.DocumentType.Equals(docType));
+                        return documentRepository.GetQuery().Include(d => d.Documents).Include(d => d.ParentDocument).Include(d => d.Workflows).Where(d => d.DocumentType.Equals(documentType));
                     }
 
                     String barcode = context.GetArgument<String>("barcode");
                     if (!string.IsNullOrEmpty(barcode))
                     {
                         return documentRepository.GetQuery().Include(d => d.Documents).Include(d => d.ParentDocument).Include(d => d.Workflows).Where(d => d.Barcode.Equals(barcode));
+                    }
+
+                    object filter = context.GetArgument<object>("filter");
+                    if (filter != null)
+                    {
+                        return documentRepository.GetQuery().Include(d => d.Documents).Include(d => d.ParentDocument).Include(d => d.Workflows).Where(d => d.DocumentType.Equals(filter));
                     }
 
                     return documentRepository.GetQuery().Include(d => d.Documents).Include(d => d.ParentDocument).Include(d => d.Workflows);

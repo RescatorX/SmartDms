@@ -22,7 +22,7 @@ namespace SmartDmsWeb.GraphQL.Types
             Field(x => x.Created, type: typeof(DateTimeGraphType)).Description("Created property from the document object.");
             Field(x => x.CreatedBy, type: typeof(UserType)).Description("CreatedBy property from the document object.");
             Field(x => x.Documents, type: typeof(ListGraphType<DocumentType>)).Description("Documents property from the document object.");
-            Field(x => x.DocumentType, type: typeof(DocumentTypeType)).Description("DocumentType property from the document object.");
+            Field(x => x.DocumentType, type: typeof(StringGraphType)).Description("DocumentType property from the document object.");
             Field(x => x.DosExtension, type: typeof(StringGraphType)).Description("DosExtension property from the document object.");
             Field(x => x.Format, type: typeof(StringGraphType)).Description("Format property from the document object.");
             Field(x => x.Language, type: typeof(StringGraphType)).Description("Language property from the document object.");

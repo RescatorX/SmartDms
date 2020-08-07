@@ -1,27 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Threading.Tasks;
 
 using SmartDmsCommon.Extensions;
 
 namespace SmartDmsData.Entities.Registers
 {
-    public class BaseRegister : BaseEntity
+    public abstract class BaseRegister
     {
-        public bool Active { get; set; }
-        public string Code { get; set; }
-        public string Name { get; set; }
-        public string Note { get; set; }
+        [Key]
+        [DataMember(Name = "code", Order = 1)]
+        public virtual string Code { get; set; }
+        public virtual string Name { get; set; }
+        public virtual bool Active { get; set; }
+        public virtual string Note { get; set; }
 
-        public override string ToString()
-        {
-            return "BaseRegister: [ Id=" + this.Id
-                + ", Active=" + this.Active
-                + ", Code=" + this.Code
-                + ", Name=" + this.Name
-                + ", Note=" + this.Note
-                + " ]";
-        }
+        public abstract override string ToString();
     }
 }

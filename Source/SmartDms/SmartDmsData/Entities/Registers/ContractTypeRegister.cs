@@ -8,10 +8,9 @@ namespace SmartDmsData.Entities.Registers
     {
         public override string ToString()
         {
-            return "ContractTypeRegister: [ Id=" + this.Id
-                + ", Active=" + this.Active
-                + ", Code=" + this.Code
+            return "ContractTypeRegister: [ Code=" + this.Code
                 + ", Name=" + this.Name
+                + ", Active=" + this.Active
                 + ", Note=" + this.Note
                 + " ]";
         }

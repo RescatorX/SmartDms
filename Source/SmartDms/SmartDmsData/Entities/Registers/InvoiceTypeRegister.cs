@@ -8,10 +8,9 @@ namespace SmartDmsData.Entities.Registers
     {
         public override string ToString()
         {
-            return "InvoiceTypeRegister: [ Id=" + this.Id
-                + ", Active=" + this.Active
-                + ", Code=" + this.Code
+            return "InvoiceTypeRegister: [ Code=" + this.Code
                 + ", Name=" + this.Name
+                + ", Active=" + this.Active
                 + ", Note=" + this.Note
                 + " ]";
         }

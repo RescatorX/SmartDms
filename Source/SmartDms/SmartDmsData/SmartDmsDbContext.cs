@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using SmartDmsCommon.Extensions;
 using SmartDmsCommon.Utils;
 using SmartDmsData.Entities;
+using SmartDmsData.Entities.Registers;
 using SmartDmsData.Enums;
 
 namespace SmartDmsData
@@ -33,7 +34,20 @@ namespace SmartDmsData
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<AuditTrail>().ToTable("AuditTrail");
-            modelBuilder.Entity<Document>().ToTable("Document");
+            modelBuilder.Entity<Document>(b =>
+            {
+                b.HasOne(d => d.DocumentTypeRegister)
+                    .WithMany(dt => dt.Documents)
+                    .HasForeignKey(d => d.DocumentType)
+                    .IsRequired();
+            });
+
+            modelBuilder.Entity<DocumentTypeRegister>(b =>
+            {
+                b.HasMany(dt => dt.Documents)
+                    .WithOne(d => d.DocumentTypeRegister)
+                    .IsRequired();
+            });
 
             modelBuilder.Entity<User>(b =>
             {
