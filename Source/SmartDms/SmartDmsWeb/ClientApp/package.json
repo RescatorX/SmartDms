@@ -28,7 +28,7 @@
     "apollo-client": "^2.6.8",
     "aspnet-prerendering": "^3.0.1",
     "bootstrap": "^4.5.0",
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "core-js": "^2.6.11",
     "graphql": "^14.6.0",
     "graphql-tag": "^2.10.3",
